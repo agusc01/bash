@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# function to find files by name
+ffind() {
+    if [[ -n "$1" ]]; then
+        find / -name "$1" 2>/dev/null
+    else
+        echo "Aborted! You did not provide any argument."
+    fi
+}
+
+# call the function if the script is executed directly
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    ffind "$@"
+fi

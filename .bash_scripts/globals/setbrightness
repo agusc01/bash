@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# function to set brightness
+setbrightness() {
+    # check if the number of arguments is not equal to 1
+    if [[ $# -ne 1 ]]; then
+        echo "Use: setbrightness <value between 10 & 100>"
+        return 1
+    fi
+
+    value=$1
+
+    # check if the value is less than 10 or greater than 100
+    if [[ $value -lt 10 || $value -gt 100 ]]; then
+        echo "The value has to be between 10 & 100."
+        return 1
+    fi
+
+    brightness=$(echo "scale=2; $value / 100" | bc)
+
+    xrandr --output eDP-1 --brightness "$brightness"
+    echo "$(xrandr --verbose | grep -i brightness | xargs)"
+
+    source ~/.bash_scripts/globals/refreshdbar
+}
+
+# call the function if the script is executed directly
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    setbrightness "$@"
+fi

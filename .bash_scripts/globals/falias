@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# function to find aliases using fzf
+falias() {
+    # read the alias file, remove empty lines and duplicates, and pass to fzf
+    command=$(sed '/^$/d' ~/.bash_aliases | awk '!seen[$0]++' | fzf)
+
+    # extract the current command
+    current_command=$(echo "$command" | awk -F'=' '{print $2}' | tr -d "'")
+
+    if [[ -n "$current_command" ]]; then
+        echo -e "\n$command\n"
+        echo -e ".eval: $current_command\n"
+
+        eval "$current_command"
+    else
+        echo "Aborted!"
+    fi
+}
+
+falias

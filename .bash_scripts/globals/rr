@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# function to simulate a ranger command
+rr() {
+    # get a list of non-directory, non-symlink files in the current directory
+    precommand=$(ls -la | sed '1d' | grep -v '^d' | grep -v '^l')
+    # use fzf to allow the user to select a file, with a preview using batcat
+    command=$(printf "%s\n" "$precommand" | fzf --height 90% --preview "echo {} | awk '{print \$9}' | xargs -I {} batcat --style=numbers --color=always {}")
+
+    # extract the filename from the selected command
+    file=$(echo "$command" | awk '{print $9}')
+
+    # check if a file was selected
+    if [[ -n "$file" ]]; then
+        echo -e "\nnvim $file\n"
+        echo -e "eval: nvim $file\n"
+        eval "nvim $file"
+    else
+        echo "Aborted!"
+    fi
+}
+
+rr

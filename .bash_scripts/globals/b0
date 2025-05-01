@@ -1,0 +1,25 @@
+#!/bin/bash
+
+b0() {
+    # TODO: use screen alias
+    # Get the name of the connected screen
+    screen=$(xrandr | grep ' connected' | cut -d' ' -f1)
+
+    # Get the current brightness value
+    current_brightness=$(xrandr --verbose | grep -i brightness | cut -f2 -d " " | head -n 1)
+
+    # Define the new brightness value. For example, you can decrease it by 0.1
+    new_brightness=$(echo "$current_brightness - 0.1" | bc)
+
+    # Ensure the new brightness is not less than 0.1
+    if (($(echo "$new_brightness < 0.1" | bc -l))); then
+        new_brightness=0.1
+    fi
+
+    xrandr --output "$screen" --brightness "$new_brightness"
+    xrandr --verbose | grep Brightness | xargs
+
+    source ~/.bash_scripts/globals/refreshdbar
+}
+
+b0

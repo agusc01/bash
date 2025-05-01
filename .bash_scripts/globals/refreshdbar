@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# function to refresh dbar (dwm environments)
+refreshdbar() {
+    pid=$(pgrep dbar)
+
+    # check if the process ID is not empty
+    if [[ -n "$pid" ]]; then
+        kill -9 "$pid"
+        dbar &
+        disown
+    fi
+}
+
+refreshdbar

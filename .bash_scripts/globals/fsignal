@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# function to throw a fake signal (dwm environments)
+fsignal() {
+    xsetroot -name "fsignal:$1"
+}
+
+# call the function if the script is executed directly
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    fsignal "$@"
+fi

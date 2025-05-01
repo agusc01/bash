@@ -1,0 +1,17 @@
+#!/h
+
+# function to launch applications from .desktop files
+apps() {
+    # change to the applications directory and list .desktop files, then pass to fzf
+    command=$(cd '/usr/share/applications' && ls *.desktop | sed 's/\.desktop$//g' | fzf)
+
+    if [[ -n "$command" ]]; then
+        # launch the selected application
+        gtk-launch "$command"
+        exit
+    else
+        echo "Aborted!"
+    fi
+}
+
+apps

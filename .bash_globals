@@ -1,0 +1,1 @@
+export URL_REGEX="(((http|https|gopher|gemini|ftp|ftps|git)://|www\.)[a-zA-Z0-9./?=&%_-]+)"
