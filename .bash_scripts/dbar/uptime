@@ -1,0 +1,6 @@
+#!/bin/sh
+
+up_time=$(uptime | awk '{ print $3 }' | sed s/,//g)
+up_time_icon=''
+
+echo "$up_time_icon $up_time"

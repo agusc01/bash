@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ip=$(hostname -I | cut -d' ' -f1)
+ip=$(nmcli device show | grep IP4.ADDRESS | awk 'NR==2 {print $2}')
 case "$(cat /sys/class/net/wl*/operstate 2>/dev/null)" in
 up) echo "$ip  " ;;
 down) echo "󰤭 " ;;
