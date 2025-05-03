@@ -1,7 +1,0 @@
-# #!/bin/bash
-#
-# screen() {
-#     xrandr | grep ' connected' | awk '{ print $1 }' | grep -v '^$'
-# }
-#
-# screen

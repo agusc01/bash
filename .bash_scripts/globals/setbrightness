@@ -1,4 +1,6 @@
 #!/bin/bash
+# TODO: use screen alias
+# TODO: use refreshdbar function
 
 # function to set brightness
 setbrightness() {
@@ -16,9 +18,12 @@ setbrightness() {
         return 1
     fi
 
+    # get the name of the connected screen
+    screen=$(xrandr | grep ' connected' | cut -d' ' -f1)
+
     brightness=$(echo "scale=2; $value / 100" | bc)
 
-    xrandr --output eDP-1 --brightness "$brightness"
+    xrandr --output "$screen" --brightness "$brightness"
     echo "$(xrandr --verbose | grep -i brightness | xargs)"
 
     source ~/.bash_scripts/globals/refreshdbar

@@ -17,7 +17,7 @@ setsound() {
         return 1
     fi
 
-    amixer set Master "$value%"
+    amixer set Master "$value%" | grep %
 
     source ~/.bash_scripts/globals/refreshdbar
 }
