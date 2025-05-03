@@ -33,11 +33,12 @@ ask_psk() {
 }
 
 create_interfaces() {
-
-    local wifiinterface=$(iw dev | grep -i interface | xargs | cut -d " " -f2)
+    # TODO: use wifiinterface alias
+    local wifiinterface=$(nmcli device status | grep wifi | cut -d" " -f1)
     sudo touch "$INTERFACES"
     sudo mv "$INTERFACES" "$INTERFACES.bak"
-    insert_content "# This file describes the network interfaces available on your system
+    insert_content "
+# This file describes the network interfaces available on your system
 # and how to activate them. For more information, see interfaces(5).
 
 source /etc/network/interfaces.d/*
@@ -68,13 +69,33 @@ update_interfaces() {
     _wifion
 }
 
+last_action() {
+    clear
+    local wifi_response=$(ping -c 1 -s 1 www.debian.org | grep received | cut -d" " -f4)
+
+    if [[ "$wifi_response" == "1" ]]; then
+        local ssid=$(iw dev | grep ssid | xargs | sed "s/ssid //")
+        local ip=$(nmcli device show | grep IP4.ADDRESS | awk 'NR==2 {print $2}')
+        echo -e "\n========================"
+        echo "Connected to $ssid"
+        echo "Status: Ok"
+        echo "IP4: $ip"
+        echo -e "========================\n"
+    else
+        echo "Internet does not working"
+    fi
+}
+
 main() {
 
     sudo echo -e "\nScanning WiFi networks...\n"
 
-    create_interfaces
     sudo rfkill unblock wlan
+    sleep 1
     sudo ip link set wlo1 up
+    sleep 2
+    create_interfaces
+    sleep 1
 
     networks=$(sudo iwlist wlo1 scan | grep SSID | cut -d: -f2 | tr -d ' "' | sed '/^$/d' | sort | uniq)
     if [ -z "$networks" ]; then
@@ -97,6 +118,7 @@ main() {
         ask_psk
         add_network
         update_interfaces
+        last_action
         exit 0
     fi
 
@@ -114,6 +136,8 @@ main() {
         psk=$saved_psk
         update_interfaces
     fi
+
+    last_action
     exit 0
 }
 
