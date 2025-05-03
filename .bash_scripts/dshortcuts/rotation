@@ -1,0 +1,8 @@
+#!/bin/sh
+
+case "$1" in
+r) fish -c 'dr' ;;
+l) fish -c 'dl' ;;
+n) fish -c 'dn' ;;
+i) fish -c 'di' ;;
+esac
