@@ -92,6 +92,10 @@ alias wifissid='iw dev | grep ssid | xargs | sed "s/ssid //"'
 alias wifihelp='grep "alias wifi" ~/.bash_aliases | cut -c 7- | grep -v wifihelp | grep wifi'
 
 alias screen="xrandr | grep ' connected' | cut -d' ' -f1"
+alias dr='xrandr --output $(screen) --rotate right'
+alias dl='xrandr --output $(screen) --rotate left'
+alias dn='xrandr --output $(screen) --rotate normal'
+alias di='xrandr --output $(screen) --rotate inverted'
 
 alias s0='amixer set Master 10%- | grep % && refreshdbar'
 alias s1='amixer set Master 10%+ | grep % && refreshdbar'
