@@ -3,7 +3,7 @@ alias ...='cd ../..'
 
 alias l='ls -alh'
 alias lb='ls -alh | bat'
-alias lf='ls -alh | fzf'
+alias lfa='ls -alh | fzf | awk -v pwd="$(pwd)" "{print pwd \"/\" \$9}" | copyme'
 alias lg='ls -alh | grep'
 alias lgd='ls -alh | grep ^d'
 alias lgf='ls -alh | grep ^-'

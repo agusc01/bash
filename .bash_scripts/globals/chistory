@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# function to search command history using fzf and copy
+chistory() {
+    # get the command from history, excluding the 'fh' command itself
+    local command=$(fish -c history | grep -v '^ *[0-9]* *fh' | sed '/^$/d' | awk '!seen[$0]++' | fzf)
+
+    if [[ -n "$command" ]]; then
+        echo -e "\n$command\n"
+        echo "$command" | xclip -selection clipboard
+    else
+        echo "Aborted!"
+    fi
+}
+
+chistory
