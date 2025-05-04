@@ -2,7 +2,7 @@
 
 # function to refresh dbar (dwm environments)
 refreshdbar() {
-    pid=$(pgrep dbar)
+    local pid=$(pgrep dbar)
 
     # check if the process ID is not empty
     if [[ -n "$pid" ]]; then

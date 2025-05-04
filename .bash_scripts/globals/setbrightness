@@ -10,7 +10,7 @@ setbrightness() {
         return 1
     fi
 
-    value=$1
+    local value=$1
 
     # check if the value is less than 10 or greater than 100
     if [[ $value -lt 10 || $value -gt 100 ]]; then
@@ -19,9 +19,9 @@ setbrightness() {
     fi
 
     # get the name of the connected screen
-    screen=$(xrandr | grep ' connected' | cut -d' ' -f1)
+    local screen=$(xrandr | grep ' connected' | cut -d' ' -f1)
 
-    brightness=$(echo "scale=2; $value / 100" | bc)
+    local brightness=$(echo "scale=2; $value / 100" | bc)
 
     xrandr --output "$screen" --brightness "$brightness"
     echo "$(xrandr --verbose | grep -i brightness | xargs)"

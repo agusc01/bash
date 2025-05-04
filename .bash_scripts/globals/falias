@@ -3,10 +3,9 @@
 # function to find aliases using fzf
 falias() {
     # read the alias file, remove empty lines and duplicates, and pass to fzf
-    command=$(sed '/^$/d' ~/.bash_aliases | awk '!seen[$0]++' | fzf)
+    local command=$(sed '/^$/d' ~/.bash_aliases | awk '!seen[$0]++' | fzf)
 
-    # extract the current command
-    current_command=$(echo "$command" | awk -F'=' '{print $2}' | tr -d "'")
+    local current_command=$(echo "$command" | awk -F'=' '{print $2}' | tr -d "'")
 
     if [[ -n "$current_command" ]]; then
         echo -e "\n$command\n"

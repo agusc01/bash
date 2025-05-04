@@ -3,7 +3,7 @@
 # function to search command history using fzf
 fhistory() {
     # get the command from history, excluding the 'fh' command itself
-    command=$(fish -c history | grep -v '^ *[0-9]* *fh' | sed '/^$/d' | awk '!seen[$0]++' | fzf)
+    local command=$(fish -c history | grep -v '^ *[0-9]* *fh' | sed '/^$/d' | awk '!seen[$0]++' | fzf)
 
     if [[ -n "$command" ]]; then
         echo -e "\n$command\n"

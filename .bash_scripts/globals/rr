@@ -2,22 +2,33 @@
 
 # function to simulate a ranger command
 rr() {
-    # get a list of non-directory, non-symlink files in the current directory
-    precommand=$(ls -la | sed '1d' | grep -v '^d' | grep -v '^l')
-    # use fzf to allow the user to select a file, with a preview using batcat
-    command=$(printf "%s\n" "$precommand" | fzf --height 90% --preview "echo {} | awk '{print \$9}' | xargs -I {} batcat --style=numbers --color=always {}")
+    local precommand=$(ls -la | sed '1,2d')
 
-    # extract the filename from the selected command
-    file=$(echo "$command" | awk '{print $9}')
+    local command=$(printf "%s\n" "$precommand" | fzf --height 90% --preview "echo {} | awk '{print \$9}' | xargs -I {} batcat --style=numbers --color=always {}")
 
-    # check if a file was selected
-    if [[ -n "$file" ]]; then
-        echo -e "\nnvim $file\n"
-        echo -e "eval: nvim $file\n"
-        eval "nvim $file"
-    else
+    local type=$(echo "$command" | cut -c1)
+    local name=$(echo "$command" | awk '{print $9}')
+
+    if [[ -z "$type" ]]; then
         echo "Aborted!"
+        exit 0
     fi
+
+    if [[ "$type" == "-" ]]; then
+        eval_commmand "nvim" "$name"
+    elif [[ "$type" == "d" ]]; then
+        cd "$name"
+        rr
+    elif [[ "$type" == "l" ]]; then
+        eval_commmand "nvim" "$name"
+    fi
+}
+
+eval_commmand() {
+    local $name=$1
+    local $action=$2
+    echo -e "\neval: $action $name\n"
+    eval "$(echo $action) $name"
 }
 
 rr

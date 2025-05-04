@@ -4,13 +4,12 @@
 
 # function to decrease 10% the brightness of the screen
 b0() {
-    # get the name of the connected screen
-    screen=$(xrandr | grep ' connected' | cut -d' ' -f1)
+    local screen=$(xrandr | grep ' connected' | cut -d' ' -f1)
 
     # get the current brightness value
-    current_brightness=$(xrandr --verbose | grep -i brightness | cut -f2 -d " " | head -n 1)
+    local current_brightness=$(xrandr --verbose | grep -i brightness | cut -f2 -d " " | head -n 1)
 
-    new_brightness=$(echo "$current_brightness - 0.1" | bc)
+    local new_brightness=$(echo "$current_brightness - 0.1" | bc)
 
     # ensure the new brightness is not less than 0.1
     if (($(echo "$new_brightness < 0.1" | bc -l))); then

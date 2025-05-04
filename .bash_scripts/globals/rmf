@@ -1,13 +1,11 @@
 #!/bin/bash
 
 rmf() {
-    precommand=$(ls -la | sed '1d')
+    local precommand=$(ls -la | sed '1d')
 
-    # use fzf to allow the user to select a file, with a preview using batcat
-    command=$(printf "%s\n" "$precommand" | fzf --height 90% --preview "echo {} | awk '{print \$9}' | xargs -I {} batcat --style=numbers --color=always {}")
+    local command=$(printf "%s\n" "$precommand" | fzf --height 90% --preview "echo {} | awk '{print \$9}' | xargs -I {} batcat --style=numbers --color=always {}")
 
-    # extract the filename from the selected command
-    file=$(echo "$command" | awk '{print $9}')
+    local file=$(echo "$command" | awk '{print $9}')
 
     # check if a file was selected
     if [[ -n "$file" ]]; then

@@ -9,7 +9,7 @@ setsound() {
         return 1
     fi
 
-    value=$1
+    local value=$1
 
     # Check if the value is less than 0 or greater than 100
     if [[ $value -lt 0 || $value -gt 100 ]]; then
