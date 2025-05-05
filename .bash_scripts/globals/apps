@@ -2,7 +2,7 @@
 
 # function to launch applications from .desktop files
 apps() {
-    local command=$(cd '/usr/share/applications' && ls *.desktop | sed 's/\.desktop$//g' | fzf)
+    local command=$(ls /usr/share/applications/*.desktop | sed 's/\.desktop$//g' | sed 's/^\/usr\/share\/applications\///g' | fzf)
 
     if [[ -n "$command" ]]; then
         # launch the selected application
