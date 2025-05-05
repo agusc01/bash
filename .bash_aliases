@@ -9,7 +9,7 @@ alias lgd='ls -alh | grep ^d'
 alias lgf='ls -alh | grep ^-'
 alias lgi='ls -alh | grep -i'
 
-alias rm='rm -vrI'
+alias rm='rm -vrfI'
 alias cp='cp -vr'
 alias mv='mv -v'
 alias mkdir='mkdir -vp'
