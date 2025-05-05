@@ -92,10 +92,13 @@ main() {
 
     sudo rfkill unblock wlan
     sleep 1
-    sudo ip link set wlo1 up
-    sleep 2
-    create_interfaces
     sleep 1
+    sleep 1
+    sudo ip link set wlo1 up
+    sleep 1
+    sleep 1
+    sleep 1
+    create_interfaces
 
     networks=$(sudo iwlist wlo1 scan | grep SSID | cut -d: -f2 | tr -d ' "' | sed '/^$/d' | sort | uniq)
     if [ -z "$networks" ]; then
