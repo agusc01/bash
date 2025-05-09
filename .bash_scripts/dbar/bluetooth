@@ -1,0 +1,19 @@
+#!/bin/sh
+
+is_block=$(rfkill | grep bluetooth | awk '{print $4}')
+if [ "$is_block" = "unblocked" ]; then
+    icon_block=""
+else
+    icon_block=""
+fi
+
+is_running=$(systemctl is-active bluetooth)
+if [ "$is_running" = "active" ]; then
+    icon_running=""
+else
+    icon_running=""
+fi
+
+icon_bluetooth=""
+
+echo "$icon_bluetooth $icon_block $icon_running"

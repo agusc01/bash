@@ -1,0 +1,6 @@
+#!/bin/sh
+
+updates_status=$(apt list --upgradable 2>/dev/null | grep "upgradable" | wc -l)
+updates_icon=''
+
+echo "$updates_icon $updates_status"
