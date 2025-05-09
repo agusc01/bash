@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nmcli device show | grep IP4.ADDRESS | awk 'NR==1 {print $2}'

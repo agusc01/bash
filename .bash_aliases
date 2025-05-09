@@ -78,6 +78,8 @@ alias ethernetinterface='nmcli device status | grep ethernet | cut -d " " -f1 | 
 
 alias wifiset='nvim /etc/network/interfaces'
 alias wifishow='cat /etc/network/interfaces'
+
+# alias wifiip see function wifiip
 alias wifilast='grep -A1 ssid /etc/network/interfaces | tr -d "\t"'
 alias wifihistory='cat /etc/network/.networks'
 alias wifiinterface='nmcli device status | grep wifi | cut -d" " -f1 | head -1'
