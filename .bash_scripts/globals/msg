@@ -1,0 +1,24 @@
+#!/bin/bash
+
+msg() {
+    local opcion="${3:-both}"
+
+    case $opcion in
+    terminal)
+        echo "$1" "$2"
+        ;;
+    notify)
+        notify-send "$1" "$2"
+        ;;
+    both)
+        echo "$1" "$2"
+        notify-send "$1" "$2"
+        ;;
+    *)
+        echo "Option no valid. Use: $0 {terminal|notify|both}"
+        exit 1
+        ;;
+    esac
+}
+
+msg "$@"
