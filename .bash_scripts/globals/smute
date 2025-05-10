@@ -1,0 +1,14 @@
+#!/bin/bash
+# TODO: use refreshdbar function
+
+# function mute the sound
+smute() {
+
+    local option="${1:-terminal}"
+    pulsemixer --mute
+
+    source ~/.bash_scripts/globals/msg "Sound" "Mute" "$option"
+    source ~/.bash_scripts/globals/refreshdbar
+}
+
+smute "$1"

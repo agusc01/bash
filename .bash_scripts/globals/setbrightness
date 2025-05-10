@@ -4,13 +4,9 @@
 
 # function to set brightness
 setbrightness() {
-    # check if the number of arguments is not equal to 1
-    if [[ $# -ne 1 ]]; then
-        echo "Use: setbrightness <value between 10 & 100>"
-        return 1
-    fi
 
     local value=$1
+    local option="${2:-terminal}"
 
     # check if the value is less than 10 or greater than 100
     if [[ $value -lt 10 || $value -gt 100 ]]; then
@@ -21,15 +17,13 @@ setbrightness() {
     # get the name of the connected screen
     local screen=$(xrandr | grep ' connected' | cut -d' ' -f1)
 
-    local brightness=$(echo "scale=2; $value / 100" | bc)
+    local new_brightness=$(echo "scale=2; $value / 100" | bc)
 
-    xrandr --output "$screen" --brightness "$brightness"
-    echo "$(xrandr --verbose | grep -i brightness | xargs)"
+    xrandr --output "$screen" --brightness "$new_brightness"
 
+    local text=$(echo "$new_brightness" | xargs -I {} echo {} "*100" | bc | cut -d. -f1)
+    source ~/.bash_scripts/globals/msg "Brightness" "$text%" "$option"
     source ~/.bash_scripts/globals/refreshdbar
 }
 
-# call the function if the script is executed directly
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    setbrightness "$@"
-fi
+setbrightness "$@"

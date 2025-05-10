@@ -101,11 +101,6 @@ alias dl='xrandr --output $(screen) --rotate left'
 alias dn='xrandr --output $(screen) --rotate normal'
 alias di='xrandr --output $(screen) --rotate inverted'
 
-alias s0='amixer set Master 10%- | grep % && refreshdbar'
-alias s1='amixer set Master 10%+ | grep % && refreshdbar'
-alias smute='amixer set Master mute | grep % && refreshdbar'
-alias sunmute='amixer set Master unmute | grep % && refreshdbar'
-
 alias dbarshow='eval $(ls ~/.bash_scripts/dbar/ | sed "s/*//g" | grep -v dbarshow | sed "s/^/dbar_/g" | xargs | sed "s/ / \&\& /g")'
 
 alias cfish='cd ~/.config/fish && nv'

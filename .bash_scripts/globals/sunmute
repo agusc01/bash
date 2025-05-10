@@ -1,0 +1,14 @@
+#!/bin/bash
+# TODO: use refreshdbar function
+
+# function unmute the sound
+sunmute() {
+
+    local option="${1:-terminal}"
+    pulsemixer --unmute
+
+    source ~/.bash_scripts/globals/msg "Sound" "Unmute" "$option"
+    source ~/.bash_scripts/globals/refreshdbar
+}
+
+sunmute "$1"

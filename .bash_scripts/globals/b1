@@ -4,6 +4,8 @@
 
 # function to decrease 10% the brightness of the screen
 b1() {
+
+    local option="${1:-terminal}"
     local screen=$(xrandr | grep ' connected' | cut -d' ' -f1)
 
     # get the current brightness value
@@ -17,9 +19,10 @@ b1() {
     fi
 
     xrandr --output "$screen" --brightness "$new_brightness"
-    xrandr --verbose | grep Brightness | xargs
 
+    local text=$(echo "$new_brightness" | xargs -I {} echo {} "*100" | bc | cut -d. -f1)
+    source ~/.bash_scripts/globals/msg "Brightness" "$text%" "$option"
     source ~/.bash_scripts/globals/refreshdbar
 }
 
-b1
+b1 "$1"

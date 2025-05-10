@@ -1,15 +1,10 @@
 #!/bin/bash
 
 # function to set sound
-
 setsound() {
-    # Check if the number of arguments is not equal to 1
-    if [[ $# -ne 1 ]]; then
-        echo "Use: setsound <value between 0 & 100>"
-        return 1
-    fi
 
     local value=$1
+    local option="${2:-terminal}"
 
     # Check if the value is less than 0 or greater than 100
     if [[ $value -lt 0 || $value -gt 100 ]]; then
@@ -17,12 +12,10 @@ setsound() {
         return 1
     fi
 
-    amixer set Master "$value%" | grep %
+    pulsemixer --set-volume "$value"
 
+    source ~/.bash_scripts/globals/msg "Sound" "$value%" "$option"
     source ~/.bash_scripts/globals/refreshdbar
 }
 
-# call the function if the script is executed directly
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    setsound "$@"
-fi
+setsound "$@"

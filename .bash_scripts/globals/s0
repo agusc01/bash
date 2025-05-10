@@ -1,0 +1,16 @@
+#!/bin/bash
+# TODO: use refreshdbar function
+
+# function decrease 10% the sound
+s0() {
+
+    local option="${1:-terminal}"
+    local current_volume=$(pulsemixer --get-volume | cut -d' ' -f1)
+    local new_volumen=$(echo "$current_volume" - 10 | bc)
+    pulsemixer --set-volume "$new_volumen"
+
+    source ~/.bash_scripts/globals/msg "Sound" "$new_volumen%" "$option"
+    source ~/.bash_scripts/globals/refreshdbar
+}
+
+s0 "$1"
