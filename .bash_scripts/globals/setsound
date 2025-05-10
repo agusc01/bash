@@ -12,9 +12,10 @@ setsound() {
         return 1
     fi
 
+    local get_mute=$(pulsemixer --get-mute | sed s/0/Unmute/ | sed s/1/Mute/)
     pulsemixer --set-volume "$value"
 
-    source ~/.bash_scripts/globals/msg "Sound" "$value%" "$option"
+    source ~/.bash_scripts/globals/msg "Sound $get_mute" "$value%" "$option"
     source ~/.bash_scripts/globals/refreshdbar
 }
 

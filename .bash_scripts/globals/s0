@@ -7,7 +7,12 @@ s0() {
     local option="${1:-terminal}"
     local current_volume=$(pulsemixer --get-volume | cut -d' ' -f1)
     local new_volumen=$(echo "$current_volume" - 10 | bc)
-    local get_mute=$(pulsemixer --get-mute | sed s/1/Unmute/ | sed s/0/Mute/)
+
+    if [ "$new_volumen" -lt 0 ]; then
+        new_volumen=0
+    fi
+
+    local get_mute=$(pulsemixer --get-mute | sed s/0/Unmute/ | sed s/1/Mute/)
     pulsemixer --set-volume "$new_volumen"
 
     source ~/.bash_scripts/globals/msg "Sound $get_mute" "$new_volumen%" "$option"
