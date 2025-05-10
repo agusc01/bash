@@ -3,19 +3,19 @@
 # TODO: use fsignal
 
 case "$1" in
-j) fish -c 's0' ;;
-k) fish -c 's1' ;;
-0) fish -c 'setsound 0' ;;
-1) fish -c 'setsound 10' ;;
-2) fish -c 'setsound 20' ;;
-3) fish -c 'setsound 30' ;;
-4) fish -c 'setsound 40' ;;
-5) fish -c 'setsound 50' ;;
-6) fish -c 'setsound 60' ;;
-7) fish -c 'setsound 70' ;;
-8) fish -c 'setsound 80' ;;
-9) fish -c 'setsound 90' ;;
-o) fish -c 'setsound 100' ;;
-u) fish -c 'sunmute' ;;
-m) fish -c 'smute' ;;
+j) fish -c 's0 "notify"' ;;
+k) fish -c 's1 "notify"' ;;
+0) fish -c 'setsound 0 "notify"' ;;
+1) fish -c 'setsound 10 "notify"' ;;
+2) fish -c 'setsound 20 "notify"' ;;
+3) fish -c 'setsound 30 "notify"' ;;
+4) fish -c 'setsound 40 "notify"' ;;
+5) fish -c 'setsound 50 "notify"' ;;
+6) fish -c 'setsound 60 "notify"' ;;
+7) fish -c 'setsound 70 "notify"' ;;
+8) fish -c 'setsound 80 "notify"' ;;
+9) fish -c 'setsound 90 "notify"' ;;
+o) fish -c 'setsound 100 "notify"' ;;
+u) fish -c 'sunmute "notify"' ;;
+m) fish -c 'smute "notify"' ;;
 esac
