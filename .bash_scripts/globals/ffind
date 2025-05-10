@@ -9,7 +9,4 @@ ffind() {
     fi
 }
 
-# call the function if the script is executed directly
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    ffind "$@"
-fi
+ffind "$@"
