@@ -5,9 +5,10 @@
 smute() {
 
     local option="${1:-terminal}"
+    local current_volume=$(pulsemixer --get-volume | cut -d' ' -f1)
     pulsemixer --mute
 
-    source ~/.bash_scripts/globals/msg "Sound" "Mute" "$option"
+    source ~/.bash_scripts/globals/msg "Sound Mute" "$current_volume%" "$option"
     source ~/.bash_scripts/globals/refreshdbar
 }
 

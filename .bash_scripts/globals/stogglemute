@@ -5,10 +5,11 @@
 stogglemute() {
 
     local option="${1:-terminal}"
+    local current_volume=$(pulsemixer --get-volume | cut -d' ' -f1)
     pulsemixer --toggle-mute
 
-    local text=$(pulsemixer --get-mute | sed s/1/Unmute/ | sed s/0/Mute/)
-    source ~/.bash_scripts/globals/msg "Sound" "$text%" "$option"
+    local get_mute=$(pulsemixer --get-mute | sed s/1/Unmute/ | sed s/0/Mute/)
+    source ~/.bash_scripts/globals/msg "Sound $get_mute" "$current_volume%" "$option"
     source ~/.bash_scripts/globals/refreshdbar
 }
 
