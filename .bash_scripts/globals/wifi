@@ -3,8 +3,9 @@
 main() {
     # You can use rofi & fzf
     local prompt_type="${1:-fzf}"
+    local msg_type="${2:-terminal}"
 
-    _msg "Getting list of available Wi-Fi networks..."
+    msg "Getting list of available Wi-Fi networks..." " " "$msg_type"
     wifi_list=$(nmcli --fields "SECURITY,SSID" device wifi list | sed 1d | sed 's/  */ /g' | sed -E "s/WPA*.?\S/ /g" | sed "s/^--/ /g" | sed "s/  //g" | sed "/--/d")
 
     connected=$(nmcli -fields WIFI g)
@@ -37,36 +38,24 @@ main() {
                 nmcli connection modify "$chosen_id" 802-11-wireless.psk "$wifi_password"
             fi
 
-            nmcli connection up id "$chosen_id" | grep "successfully" && _msg "Connection Established" "$success_message"
+            nmcli connection up id "$chosen_id" | grep "successfully" && msg "Connection Established" "$success_message" "$msg_type"
             source ~/.bash_scripts/globals/refreshdbar
         else
             if [[ "$chosen_network" =~ "" ]]; then
                 wifi_password=$(prompt "$prompt_type" "Password: ")
             fi
-            nmcli device wifi connect "$chosen_id" password "$wifi_password" | grep "successfully" && _msg "Connection Established" "$success_message"
+            nmcli device wifi connect "$chosen_id" password "$wifi_password" | grep "successfully" && msg "Connection Established" "$success_message" "$msg_type"
             source ~/.bash_scripts/globals/refreshdbar
         fi
     fi
 }
 
-_msg() {
+msg() {
     source ~/.bash_scripts/globals/msg "$@"
 }
 
 prompt() {
-    if [ "$#" -ne 2 ]; then
-        _msg "Error: prompt needs 2 parameters."
-        return 1
-    fi
-
-    if [ "$1" = "fzf" ]; then
-        fzf --height 50% --reverse --prompt "$2"
-    elif [ "$1" = "rofi" ]; then
-        rofi -dmenu -p "$2"
-    else
-        _msg "Error: Unsupported prompt type."
-        return 1
-    fi
+    source ~/.bash_scripts/globals/prompt "$@"
 }
 
 main $1
