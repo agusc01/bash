@@ -1,0 +1,23 @@
+#!/bin/bash
+
+prompt() {
+    if [ "$#" -ne 2 ]; then
+        _msg "Error: prompt needs 2 parameters." " " "$msg_type"
+        return 1
+    fi
+
+    if [ "$1" = "fzf" ]; then
+        fzf --height 50% --reverse --prompt "$2"
+    elif [ "$1" = "rofi" ]; then
+        rofi -dmenu -p "$2"
+    else
+        msg "Error: Unsupported prompt type." " " "$msg_type"
+        return 1
+    fi
+}
+
+msg() {
+    source ~/.bash_scripts/globals/msg "$@"
+}
+
+prompt "$@"
