@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Function to kill onboard if exists and launch a new one
+onboard() {
+    local pid=$(pgrep onboard)
+
+    if [[ -n $pid ]]; then
+        kill -9 $pid
+    fi
+
+    gtk-launch onboard
+}
+
+onboard
