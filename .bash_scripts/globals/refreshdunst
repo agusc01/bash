@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# function to refresh dunst (notifications)
+refreshdunst() {
+    local pid=$(pgrep dunst)
+
+    if [[ -n $pid ]]; then
+        kill -9 $pid
+    fi
+
+    dunst -config ~/.config/dunst/dunstrc &
+    disown
+}
+
+refreshdunst
