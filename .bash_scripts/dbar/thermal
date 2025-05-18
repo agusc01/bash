@@ -1,7 +1,28 @@
-#!/bin/sh
+#!/bin/bash
 
+sum_temperatures=0
+count=0
 temperature_icon=''
-temperature=$(cat "/sys/class/thermal/thermal_zone0/temp")
-temperature_c=$(echo "scale=1; $temperature / 1000" | bc)
 
-echo "$temperature_icon $temperature_c°C"
+# Loop through all temperature files in thermal_zone
+for zone in /sys/class/thermal/thermal_zone*; do
+    # Check if the temp file exists and is a regular file
+    if [ -f "$zone/temp" ]; then
+        # Read the temperature and convert it to Celsius
+        temp=$(cat "$zone/temp")
+        # Divide by 1000 to convert to degrees Celsius
+        temp_celsius=$(echo "scale=1; $temp / 1000" | bc)
+
+        # Add the temperature to the sum and increment the count
+        sum_temperatures=$(echo "$sum_temperatures + $temp_celsius" | bc)
+        count=$((count + 1))
+    fi
+done
+
+# Calculate the average
+if [ $count -gt 0 ]; then
+    average=$(echo "scale=1; $sum_temperatures / $count" | bc)
+    echo "$temperature_icon $average°C"
+else
+    echo "$temperature_icon ERROR"
+fi
