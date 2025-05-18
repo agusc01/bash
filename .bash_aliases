@@ -43,6 +43,8 @@ alias img='cd ~/Pictures'
 
 alias a='apps'
 
+alias bluetoothenable='rfkill unblock bluetooth'
+alias bluetoothdisable='rfkill block bluetooth'
 alias gbluetooth='blueman-applet & blueman-manager'
 alias audio='pavucontrol'
 alias mongoon='sudo mongod --config /etc/mongod.conf'
