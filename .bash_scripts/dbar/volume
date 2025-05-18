@@ -1,14 +1,6 @@
 #!/bin/sh
 
-volume=$(amixer get Master | grep -o '[0-9]*%' | head -n 1 | tr -d '%')
-volume_icon=""
+volume=$(pulsemixer --get-volume | cut -d' ' -f1)
+volume_icon=$(pulsemixer --get-mute | sed s/0// | sed s/1//)
 
-mute_status=$(amixer get Master | grep -o off)
-
-if [ -n "$mute_status" ]; then
-    volume_icon=""
-else
-    volume_icon=""
-fi
-
-echo "$volume_icon $volume"
+echo "$volume_icon $volume%"
