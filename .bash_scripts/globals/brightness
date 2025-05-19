@@ -1,0 +1,35 @@
+#!/bin/bash
+
+msg() {
+    source ~/.bash_scripts/globals/msg "$@"
+}
+
+prompt() {
+    source ~/.bash_scripts/globals/prompt $prompt_type "$@"
+}
+
+main() {
+    prompt_type="${1:-fzf}"
+    msg_type="${2:-terminal}"
+    local option=$(echo -e "j: Decrement Brightness 10%\nk: Increment Brightness 10%\n0: Set in Brightness 0%\n1: Set in Brightness 10%\n2: Set in Brightness 20%\n3: Set in Brightness 30%\n4: Set in Brightness 40%\n5: Set in Brightness 50%\n6: Set in Brightness 60%\n7: Set in Brightness 70%\n8: Set in Brightness 80%\n9: Set in Brightness 90%\no: Set Brightness in 100%" | prompt "Choose an option: ")
+    local value=$(echo "$option" | cut -d: -f1)
+
+    case "$value" in
+    j) fish -c "b0                \"$msg_type\"" ;;
+    k) fish -c "b1                \"$msg_type\"" ;;
+    0) fish -c "setbrightness 0   \"$msg_type\"" ;;
+    1) fish -c "setbrightness 10  \"$msg_type\"" ;;
+    2) fish -c "setbrightness 20  \"$msg_type\"" ;;
+    3) fish -c "setbrightness 30  \"$msg_type\"" ;;
+    4) fish -c "setbrightness 40  \"$msg_type\"" ;;
+    5) fish -c "setbrightness 50  \"$msg_type\"" ;;
+    6) fish -c "setbrightness 60  \"$msg_type\"" ;;
+    7) fish -c "setbrightness 70  \"$msg_type\"" ;;
+    8) fish -c "setbrightness 80  \"$msg_type\"" ;;
+    9) fish -c "setbrightness 90  \"$msg_type\"" ;;
+    o) fish -c "setbrightness 100 \"$msg_type\"" ;;
+    *) echo "Option no valid" ;;
+    esac
+}
+
+main "$@"

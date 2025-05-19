@@ -1,0 +1,26 @@
+#!/bin/bash
+
+msg() {
+    source ~/.bash_scripts/globals/msg "$@"
+}
+
+prompt() {
+    source ~/.bash_scripts/globals/prompt $prompt_type "$@"
+}
+
+main() {
+    prompt_type="${1:-fzf}"
+    msg_type="${2:-terminal}"
+    local option=$(echo -e "r: Right\nl: Left\nn: Normal\ni: Inverted" | prompt "Choose an orientation: ")
+    local value=$(echo "$option" | cut -d: -f1)
+
+    case "$value" in
+    r) fish -c 'dr' ;;
+    l) fish -c 'dl' ;;
+    n) fish -c 'dn' ;;
+    i) fish -c 'di' ;;
+    *) echo "Option no valid" ;;
+    esac
+}
+
+main "$@"
