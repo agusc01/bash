@@ -2,7 +2,7 @@
 
 prompt() {
     if [ "$#" -ne 2 ]; then
-        _msg "Error: prompt needs 2 parameters." " " "$msg_type"
+        msg "Error: prompt needs 2 parameters." " " "$msg_type"
         return 1
     fi
 
