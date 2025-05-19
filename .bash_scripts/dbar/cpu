@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cpu_usage=$(mpstat 1 1 | tail -1 | awk '{print $5}')
+cpu_usage=$(mpstat 1 1 | tail -1 | awk '{print $5}' | cut -d. -f1)
 cpu_icon=''
 
 echo "$cpu_icon $cpu_usage%"

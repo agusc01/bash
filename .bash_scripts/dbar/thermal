@@ -21,7 +21,7 @@ done
 
 # Calculate the average
 if [ $count -gt 0 ]; then
-    average=$(echo "scale=1; $sum_temperatures / $count" | bc)
+    average=$(echo "scale=1; $sum_temperatures / $count" | bc | cut -d. -f1)
     echo "$temperature_icon $average°C"
 else
     echo "$temperature_icon ERROR"
