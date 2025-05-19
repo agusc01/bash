@@ -53,6 +53,7 @@ alias nvimswap='cd /home/dev/.local/state/nvim/swap'
 
 alias r='ranger'
 alias open='thunar'
+alias camera='guvcview'
 alias nv='git pull && nvim .'
 alias w='curl wttr.in'
 alias weather='curl wttr.in'
