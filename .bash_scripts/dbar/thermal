@@ -3,6 +3,7 @@
 sum_temperatures=0
 count=0
 temperature_icon=''
+temperature_color=''
 
 # Loop through all temperature files in thermal_zone
 for zone in /sys/class/thermal/thermal_zone*; do
@@ -22,7 +23,26 @@ done
 # Calculate the average
 if [ $count -gt 0 ]; then
     average=$(echo "scale=1; $sum_temperatures / $count" | bc | cut -d. -f1)
-    echo "$temperature_icon $average°C"
+
+    if [ "$average" -gt 40 ]; then
+        temperature_color='\x03'
+    elif [ "$average" -gt 39 ]; then
+        temperature_color='\x04'
+    elif [ "$average" -gt 38 ]; then
+        temperature_color='\x05'
+    elif [ "$average" -gt 37 ]; then
+        temperature_color='\x06'
+    elif [ "$average" -gt 36 ]; then
+        temperature_color='\x07'
+    elif [ "$average" -gt 35 ]; then
+        temperature_color='\x08'
+    elif [ "$average" -gt 34 ]; then
+        temperature_color='\x09'
+    else
+        temperature_color='\x10'
+    fi
+
+    echo -e "$temperature_color $temperature_icon$average°C \x01"
 else
-    echo "$temperature_icon ERROR"
+    echo -e "$temperature_color $temperature_icon ERROR \x01"
 fi

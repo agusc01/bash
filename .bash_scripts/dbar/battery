@@ -2,23 +2,34 @@
 
 battery_capacity=$(cat /sys/class/power_supply/BAT1/capacity)
 battery_status=$(cat /sys/class/power_supply/BAT1/status)
+battery_color=''
 battery_icon=''
 
 if [ "$battery_status" = 'Charging' ]; then
+    battery_color='\x15'
     battery_symbol=''
 elif [ "$battery_status" = 'Discharging' ]; then
     battery_symbol=''
     if [ "$battery_capacity" -lt 10 ]; then
-        fish -c 'setbrightness 25'
-        # TODO use mpg123, for now I'm not using because crash the computer
-        # mpg123 ~/.config/dbar/sounds/mayday.mp3 &
-    elif [ "$battery_capacity" -lt 15 ]; then
         fish -c 'setbrightness 15'
-        # TODO use mpg123, for now I'm not using because crash the computer
-        # mpg123 ~/.config/dbar/sounds/hey-mate.mp3 &
+        battery_color='\x03'
+    elif [ "$battery_capacity" -lt 15 ]; then
+        fish -c 'setbrightness 25'
+        battery_color='\x04'
+    elif [ "$battery_capacity" -lt 25 ]; then
+        battery_color='\x05'
+    elif [ "$battery_capacity" -lt 35 ]; then
+        battery_color='\x06'
+    elif [ "$battery_capacity" -lt 45 ]; then
+        battery_color='\x07'
+    elif [ "$battery_capacity" -lt 55 ]; then
+        battery_color='\x08'
+    else
+        battery_color='\x09'
     fi
 elif [ "$battery_status" = 'Full' ]; then
+    battery_color='\x16'
     battery_symbol=''
 fi
 
-echo "$battery_icon $battery_capacity $battery_symbol "
+echo -e "$battery_color $battery_icon $battery_capacity $battery_symbol \x01"

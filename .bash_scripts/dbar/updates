@@ -3,4 +3,10 @@
 updates_status=$(apt list --upgradable 2>/dev/null | grep "upgradable" | wc -l)
 updates_icon=''
 
-echo "$updates_icon $updates_status"
+if [ "$updates_status" -gt 0 ]; then
+    updates_color="\x03"
+    # else
+    # updates_color="\x09"
+fi
+
+echo -e "$updates_color $updates_icon $updates_status \x01"

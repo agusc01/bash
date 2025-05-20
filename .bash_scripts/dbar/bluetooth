@@ -2,11 +2,7 @@
 
 is_block=$(rfkill | grep bluetooth | awk '{print $4}')
 if [ "$is_block" = "unblocked" ]; then
-    icon_status=""
+    echo -e "\x09  \x01"
 else
-    icon_status=""
+    echo -e "\x03  \x01"
 fi
-
-icon_bluetooth=""
-
-echo "$icon_bluetooth $icon_status"

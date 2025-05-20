@@ -1,6 +1,12 @@
 #!/bin/sh
 
 volume=$(pulsemixer --get-volume | cut -d' ' -f1)
-volume_icon=$(pulsemixer --get-mute | sed s/0// | sed s/1//)
+mute_status=$(pulsemixer --get-mute)
 
-echo "$volume_icon $volume%"
+if [ "$mute_status" -eq 0 ]; then
+    volume_icon="\x09 "
+else
+    volume_icon="\x03 "
+fi
+
+echo -e "$volume_icon $volume% \x01"

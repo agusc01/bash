@@ -1,10 +1,20 @@
 #!/bin/sh
 
-# date="$(date +'%A %d/%m/%Y')"
-# date="$(date +'%A %d/%m')"
-# date="$(date +'%A %d %B %m')"
 date="$(date +'%A %d %B')"
 clock="$(date +'%H:%M')"
-# uptime="$(uptime -p)"
-# echo "$date ($uptime)"
-echo " $date |  $clock"
+up_time=$(uptime | awk '{ print $3 }' | sed s/,//g)
+hours=$(uptime -p | grep -o '[0-9]\+ hour' | grep -o '[0-9]\+')
+
+if [ "$hours" -lt 1 ]; then
+    up_time_color='\x01'
+elif [ "$hours" -lt 2 ]; then
+    up_time_color='\x06'
+elif [ "$hours" -lt 3 ]; then
+    up_time_color='\x05'
+elif [ "$hours" -lt 4 ]; then
+    up_time_color='\x04'
+else
+    up_time_color='\x03'
+fi
+
+echo -e " $date $up_time_color  $up_time \x01  $clock"
