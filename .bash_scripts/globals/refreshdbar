@@ -2,14 +2,10 @@
 
 # function to refresh dbar (dwm environments)
 refreshdbar() {
-    local pid=$(pgrep dbar)
+    fish -c 'killdbar'
 
-    if [[ -n $pid ]]; then
-        kill -9 $pid
-    fi
+    fish -c 'dbar'
 
-    dbar &
-    disown
 }
 
 refreshdbar

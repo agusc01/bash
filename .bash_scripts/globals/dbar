@@ -1,61 +1,66 @@
 #!/bin/bash
 
-# Define the commands with their update intervals in a single array
-commands=(
-    "dbar_bluetooth:60" # Bluetooth status check every 60 seconds
-    "dbar_wifi:60"      # Wi-Fi status check every 60 seconds
-    "dbar_brightness:0" # Brightness check (no interval, run once)
-    "dbar_volume:0"     # Volume check (no interval, run once)
-    "dbar_cpu:5"        # CPU load check every 5 seconds
-    "dbar_thermal:10"   # Thermal status check every 10 seconds
-    "dbar_memory:5"     # Memory usage check every 5 seconds
-    "dbar_updates:0"    # Updates check (no interval, run once)
-    "dbar_date:50"      # Date check every 50 seconds
-    "dbar_battery:60"   # Battery status check every 60 seconds
-)
-
-# Initialize counters and last outputs for each command
-declare -A counters
-declare -A last_outputs
-for cmd in "${commands[@]}"; do
-    IFS=':' read -r command interval <<<"$cmd"
-    counters[$command]=0
-    last_outputs[$command]=""
-done
-
 # Function to execute commands and store their output
 execute_command() {
     local cmd=$1
     last_outputs[$cmd]=$(eval fish -c "$cmd") # Execute the command and store the output
 }
 
-# Execute all commands initially
-for cmd in "${commands[@]}"; do
-    IFS=':' read -r command interval <<<"$cmd"
-    execute_command "$command"
-done
+dbar() {
+    # Define the commands with their update intervals in a single array
+    commands=(
+        "dbar_bluetooth:60" # Bluetooth status check every 60 seconds
+        "dbar_wifi:60"      # Wi-Fi status check every 60 seconds
+        "dbar_brightness:0" # Brightness check (no interval, run once)
+        "dbar_volume:0"     # Volume check (no interval, run once)
+        "dbar_cpu:5"        # CPU load check every 5 seconds
+        "dbar_thermal:10"   # Thermal status check every 10 seconds
+        "dbar_memory:5"     # Memory usage check every 5 seconds
+        "dbar_updates:0"    # Updates check (no interval, run once)
+        "dbar_date:50"      # Date check every 50 seconds
+        "dbar_battery:60"   # Battery status check every 60 seconds
+    )
 
-# Main loop
-while true; do
-    output=""
+    # Initialize counters and last outputs for each command
+    declare -A counters
+    declare -A last_outputs
     for cmd in "${commands[@]}"; do
         IFS=':' read -r command interval <<<"$cmd"
-
-        # Increment the counter for each command
-        ((counters[$command]++))
-
-        # Check if the command should be updated
-        if ((counters[$command] >= interval)); then
-            execute_command "$command" # Execute the corresponding function and store the output
-            counters[$command]=0       # Reset the counter
-        fi
-
-        # Append the last output to the final output
-        output+="${last_outputs[$command]} "
+        counters[$command]=0
+        last_outputs[$command]=""
     done
 
-    # Update the status bar
-    xsetroot -name "$output"
+    # Execute all commands initially
+    for cmd in "${commands[@]}"; do
+        IFS=':' read -r command interval <<<"$cmd"
+        execute_command "$command"
+    done
 
-    sleep 1 # Wait one second before the next iteration
-done
+    # Main loop
+    while true; do
+        output=""
+        for cmd in "${commands[@]}"; do
+            IFS=':' read -r command interval <<<"$cmd"
+
+            # Increment the counter for each command
+            ((counters[$command]++))
+
+            # Check if the command should be updated
+            if ((counters[$command] >= interval)); then
+                execute_command "$command" # Execute the corresponding function and store the output
+                counters[$command]=0       # Reset the counter
+            fi
+
+            # Append the last output to the final output
+            output+="${last_outputs[$command]}"
+        done
+
+        # Update the status bar
+        xsetroot -name "$output"
+
+        sleep 1 # Wait one second before the next iteration
+    done
+}
+
+dbar &
+echo $! >/tmp/dbar_pid
