@@ -2,4 +2,4 @@
 
 brightness=$(xrandr --verbose | grep -i brightness | awk '{print $2 *100}' | bc)
 brightness_icon=""
-echo "$brightness_icon $brightness%"
+echo -e "$brightness_icon $brightness%"

@@ -1,6 +1,29 @@
 #!/bin/sh
 
+memory_total=$(free | grep Mem | awk '{print $2}')
+memory_use=$(free | grep Mem | awk '{print $3}')
+memory_percent=$(echo "scale=2; ($memory_use / $memory_total) * 100" | bc | cut -d. -f1)
+
 memory=$(free -h | awk 'NR==2 { print $3 }' | sed s/i//g)
 memory_icon=''
+memory_color=''
 
-echo "$memory_icon $memory"
+if [ "$memory_percent" -gt 80 ]; then
+    memory_color='\x03'
+elif [ "$memory_percent" -gt 70 ]; then
+    memory_color='\x04'
+elif [ "$memory_percent" -gt 55 ]; then
+    memory_color='\x05'
+elif [ "$memory_percent" -gt 45 ]; then
+    memory_color='\x06'
+elif [ "$memory_percent" -gt 35 ]; then
+    memory_color='\x0d'
+elif [ "$memory_percent" -gt 30 ]; then
+    memory_color='\x0e'
+elif [ "$memory_percent" -gt 20 ]; then
+    memory_color='\x16'
+else
+    memory_color='\x20'
+fi
+
+echo -e "$memory_color $memory_icon $memory \x01"

@@ -10,25 +10,25 @@ if [ "$battery_status" = 'Charging' ]; then
     battery_symbol=''
 elif [ "$battery_status" = 'Discharging' ]; then
     battery_symbol=''
-    if [ "$battery_capacity" -lt 10 ]; then
-        fish -c 'setbrightness 15'
+    if [ "$battery_capacity" -lt 15 ]; then
+        fish -c 'setbrightness 20'
         battery_color='\x03'
-    elif [ "$battery_capacity" -lt 15 ]; then
-        fish -c 'setbrightness 25'
+    elif [ "$battery_capacity" -lt 20 ]; then
+        fish -c 'setbrightness 35'
         battery_color='\x04'
-    elif [ "$battery_capacity" -lt 25 ]; then
+    elif [ "$battery_capacity" -lt 30 ]; then
         battery_color='\x05'
-    elif [ "$battery_capacity" -lt 35 ]; then
-        battery_color='\x06'
-    elif [ "$battery_capacity" -lt 45 ]; then
-        battery_color='\x07'
-    elif [ "$battery_capacity" -lt 55 ]; then
-        battery_color='\x08'
+    elif [ "$battery_capacity" -lt 40 ]; then
+        battery_color='\x0c'
+    elif [ "$battery_capacity" -lt 50 ]; then
+        battery_color='\x0d'
+    elif [ "$battery_capacity" -lt 60 ]; then
+        battery_color='\x0e'
     else
-        battery_color='\x09'
+        battery_color='\x20'
     fi
 elif [ "$battery_status" = 'Full' ]; then
-    battery_color='\x16'
+    battery_color='\x14'
     battery_symbol=''
 fi
 

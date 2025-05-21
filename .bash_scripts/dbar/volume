@@ -4,9 +4,9 @@ volume=$(pulsemixer --get-volume | cut -d' ' -f1)
 mute_status=$(pulsemixer --get-mute)
 
 if [ "$mute_status" -eq 0 ]; then
-    volume_icon="\x09 "
+    volume_icon="\x0e "
 else
-    volume_icon="\x03 "
+    volume_icon="\x09 "
 fi
 
 echo -e "$volume_icon $volume% \x01"

@@ -4,17 +4,18 @@ date="$(date +'%A %d %B')"
 clock="$(date +'%H:%M')"
 up_time=$(uptime | awk '{ print $3 }' | sed s/,//g)
 hours=$(uptime -p | grep -o '[0-9]\+ hour' | grep -o '[0-9]\+')
+up_time_color=''
 
-if [ "$hours" -lt 1 ]; then
-    up_time_color='\x01'
-elif [ "$hours" -lt 2 ]; then
-    up_time_color='\x06'
-elif [ "$hours" -lt 3 ]; then
-    up_time_color='\x05'
-elif [ "$hours" -lt 4 ]; then
-    up_time_color='\x04'
-else
+if [[ "$hours" -gt 4 ]]; then
     up_time_color='\x03'
+elif [[ "$hours" -gt 3 ]]; then
+    up_time_color='\x04'
+elif [[ "$hours" -gt 2 ]]; then
+    up_time_color='\x0b'
+elif [[ "$hours" -gt 1 ]]; then
+    up_time_color='\x0d'
+else
+    up_time_color='\x16'
 fi
 
-echo -e " $date $up_time_color  $up_time \x01  $clock"
+echo -e "  $date $up_time_color  $up_time \x01  $clock "
