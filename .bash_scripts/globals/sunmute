@@ -5,11 +5,14 @@
 sunmute() {
 
     local option="${1:-terminal}"
+    local refreshdbar="${2:-false}"
     local current_volume=$(pulsemixer --get-volume | cut -d' ' -f1)
     pulsemixer --unmute
 
     source ~/.bash_scripts/globals/msg "Sound Unmute" "$current_volume%" "$option"
-    source ~/.bash_scripts/globals/refreshdbar
+    if [[ "$refreshdbar" -eq true ]]; then
+        source ~/.bash_scripts/globals/refreshdbar
+    fi
 }
 
-sunmute "$1"
+sunmute "$@"

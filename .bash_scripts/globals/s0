@@ -5,6 +5,7 @@
 s0() {
 
     local option="${1:-terminal}"
+    local refreshdbar="${2:-false}"
     local current_volume=$(pulsemixer --get-volume | cut -d' ' -f1)
     local new_volumen=$(echo "$current_volume" - 10 | bc)
 
@@ -16,7 +17,9 @@ s0() {
     pulsemixer --set-volume "$new_volumen"
 
     source ~/.bash_scripts/globals/msg "Sound $get_mute" "$new_volumen%" "$option"
-    source ~/.bash_scripts/globals/refreshdbar
+    if [[ "$refreshdbar" = "true" ]]; then
+        source ~/.bash_scripts/globals/refreshdbar
+    fi
 }
 
-s0 "$1"
+s0 "$@"

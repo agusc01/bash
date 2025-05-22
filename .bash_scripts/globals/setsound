@@ -5,6 +5,7 @@ setsound() {
 
     local value=$1
     local option="${2:-terminal}"
+    local refreshdbar="${3:-false}"
 
     # Check if the value is less than 0 or greater than 100
     if [[ $value -lt 0 || $value -gt 100 ]]; then
@@ -16,7 +17,9 @@ setsound() {
     pulsemixer --set-volume "$value"
 
     source ~/.bash_scripts/globals/msg "Sound $get_mute" "$value%" "$option"
-    source ~/.bash_scripts/globals/refreshdbar
+    if [[ "$refreshdbar" -eq true ]]; then
+        source ~/.bash_scripts/globals/refreshdbar
+    fi
 }
 
 setsound "$@"

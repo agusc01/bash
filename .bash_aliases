@@ -43,6 +43,7 @@ alias img='cd ~/Pictures'
 
 alias a='apps'
 
+# TODO: bluetooth as a function to refreshdbar (optional)
 alias bluetoothenable='rfkill unblock bluetooth'
 alias bluetoothdisable='rfkill block bluetooth'
 alias gbluetooth='blueman-applet & blueman-manager'

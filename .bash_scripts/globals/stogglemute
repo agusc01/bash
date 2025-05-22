@@ -5,12 +5,15 @@
 stogglemute() {
 
     local option="${1:-terminal}"
+    local refreshdbar="${2:-false}"
     local current_volume=$(pulsemixer --get-volume | cut -d' ' -f1)
     pulsemixer --toggle-mute
 
     local get_mute=$(pulsemixer --get-mute | sed s/0/Unmute/ | sed s/1/Mute/)
     source ~/.bash_scripts/globals/msg "Sound $get_mute" "$current_volume%" "$option"
-    source ~/.bash_scripts/globals/refreshdbar
+    if [[ "$refreshdbar" -eq true ]]; then
+        source ~/.bash_scripts/globals/refreshdbar
+    fi
 }
 
-stogglemute "$1"
+stogglemute "$@"
