@@ -42,7 +42,7 @@ if [ $count -gt 0 ]; then
         temperature_color='\x16'
     fi
 
-    echo -e "$temperature_color $temperature_icon$average°C \x01"
+    echo -e "$temperature_color$temperature_icon$average°C\x01"
 else
-    echo -e "$temperature_color $temperature_icon ERROR \x01"
+    echo -e "$temperature_color$temperature_icon ERROR\x01"
 fi

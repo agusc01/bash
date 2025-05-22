@@ -6,30 +6,34 @@ battery_color=''
 battery_icon=''
 
 if [ "$battery_status" = 'Charging' ]; then
-    battery_color='\x15'
+    battery_color='\x11'
     battery_symbol=''
 elif [ "$battery_status" = 'Discharging' ]; then
     battery_symbol=''
-    if [ "$battery_capacity" -lt 15 ]; then
-        fish -c 'setbrightness 20'
-        battery_color='\x03'
-    elif [ "$battery_capacity" -lt 20 ]; then
-        fish -c 'setbrightness 35'
-        battery_color='\x04'
-    elif [ "$battery_capacity" -lt 30 ]; then
-        battery_color='\x05'
-    elif [ "$battery_capacity" -lt 40 ]; then
-        battery_color='\x0c'
-    elif [ "$battery_capacity" -lt 50 ]; then
-        battery_color='\x0d'
-    elif [ "$battery_capacity" -lt 60 ]; then
-        battery_color='\x0e'
-    else
+    if [ "$battery_capacity" -gt 80 ]; then
         battery_color='\x20'
+    elif [ "$battery_capacity" -gt 70 ]; then
+        battery_color='\x16'
+    elif [ "$battery_capacity" -gt 60 ]; then
+        battery_color='\x0e'
+    elif [ "$battery_capacity" -gt 50 ]; then
+        battery_color='\x0d'
+    elif [ "$battery_capacity" -gt 40 ]; then
+        battery_color='\x0c'
+    elif [ "$battery_capacity" -gt 30 ]; then
+        battery_color='\x0b'
+    elif [ "$battery_capacity" -gt 20 ]; then
+        battery_color='\x05'
+    elif [ "$battery_capacity" -gt 10 ]; then
+        battery_color='\x04'
+        fish -c 'setbrightness 20'
+    else
+        battery_color='\x03'
+        fish -c 'setbrightness 20'
     fi
 elif [ "$battery_status" = 'Full' ]; then
-    battery_color='\x14'
+    battery_color='\x13'
     battery_symbol=''
 fi
 
-echo -e "$battery_color $battery_icon $battery_capacity $battery_symbol \x01"
+echo -e "$battery_color$battery_icon $battery_capacity $battery_symbol\x01"

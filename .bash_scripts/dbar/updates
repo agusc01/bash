@@ -18,4 +18,4 @@ else
     updates_color="\x01"
 fi
 
-echo -e "$updates_color $updates_icon $updates_status \x01"
+echo -e "$updates_color$updates_icon $updates_status\x01"

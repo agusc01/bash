@@ -26,4 +26,4 @@ else
     memory_color='\x20'
 fi
 
-echo -e "$memory_color $memory_icon $memory \x01"
+echo -e "$memory_color$memory_icon $memory\x01"

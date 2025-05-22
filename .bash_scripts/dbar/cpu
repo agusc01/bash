@@ -22,4 +22,4 @@ else
     cpu_color='\x20'
 fi
 
-echo -e "$cpu_color $cpu_icon $cpu_usage% \x01"
+echo -e "$cpu_color$cpu_icon $cpu_usage%\x01"
