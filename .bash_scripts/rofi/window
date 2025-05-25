@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rofi \
+    -show window \
+    -kb-cancel Escape,Control+c \
+    -kb-row-down "Alt+j" \
+    -kb-row-up "Alt+k" \
+    -theme "~/.bash_scripts/rasi/rofi.rasi"
