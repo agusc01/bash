@@ -2,7 +2,7 @@
 
 is_block=$(rfkill | grep bluetooth | awk '{print $4}')
 if [ "$is_block" = "unblocked" ]; then
-    echo -e "\x03\x01"
+    echo -e "\x0e\x01"
 else
     echo -e "\x09\x01"
 fi

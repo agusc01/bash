@@ -1,0 +1,46 @@
+#!/bin/bash
+
+option_1=' '
+option_2=''
+option_3=''
+option_4=''
+last_selection=0
+
+run_rofi() {
+    local get_volume=$(pulsemixer --get-volume | cut -d' ' -f1)
+    local get_mute=$(pulsemixer --get-mute | sed s/0/Unmute/ | sed s/1/Mute/)
+    echo -e "$option_1\n$option_2\n$option_3\n$option_4" | rofi -dmenu \
+        -mesg "Volume : $(echo "$get_volume%") $(echo "| status: $get_mute")" \
+        -kb-cancel Escape,Control+c \
+        -kb-row-up "Alt+j" \
+        -kb-row-down "Alt+k" \
+        -markup-rows \
+        -selected-row "$last_selection" \
+        -theme "~/.bash_scripts/rasi/volume.rasi"
+}
+
+while true; do
+    option=$(run_rofi)
+    # Check if the option is empty (Rofi closed without selection)
+    if [ -z "$option" ]; then
+        break
+    fi
+    case $option in
+    $option_1)
+        eval 'fish -c "smute notify"'
+        last_selection=0
+        ;;
+    $option_2)
+        eval 'fish -c "sunmute notify"'
+        last_selection=1
+        ;;
+    $option_3)
+        eval 'fish -c "s0 notify"'
+        last_selection=2
+        ;;
+    $option_4)
+        eval 'fish -c "s1 notify"'
+        last_selection=3
+        ;;
+    esac
+done
