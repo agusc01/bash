@@ -1,0 +1,44 @@
+#!/bin/bash
+
+option_1=''
+option_2=''
+option_3=''
+option_4=''
+
+run_rofi() {
+    echo -e "$option_1\n$option_2\n$option_3\n$option_4" | rofi -dmenu \
+        -p "$(hostname) ($(whoami))" \
+        -mesg "Uptime : $(uptime -p | sed -e 's/up //g')" \
+        -kb-cancel Escape,Control+c \
+        -kb-row-up "Alt+j" \
+        -kb-row-down "Alt+k" \
+        -markup-rows \
+        -theme "~/.bash_scripts/rasi/power.rasi"
+}
+
+confirm_run() {
+    local yes=''
+    local no=''
+    selected="$(echo -e "$yes\n$no" | rofi -dmenu \
+        -p 'Confirmation' \
+        -mesg 'Are you Sure?' \
+        -selected-row 1 \
+        -no-click-to-exit \
+        -kb-cancel Escape,Control+c \
+        -kb-row-up "Alt+j" \
+        -kb-row-down "Alt+k" \
+        -theme "~/.bash_scripts/rasi/confirm.rasi")"
+
+    if [[ "$selected" == "$yes" ]]; then
+        ${@}
+    else
+        exit
+    fi
+}
+
+case $(run_rofi) in
+$option_1) confirm_run 'fish -c "sslock"' ;;
+$option_2) confirm_run 'systemctl poweroff' ;;
+$option_3) confirm_run 'systemctl reboot' ;;
+$option_4) confirm_run 'sudo pkill dwm' ;;
+esac
