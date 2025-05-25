@@ -1,0 +1,54 @@
+#!/bin/bash
+
+msg() {
+    source ~/.bash_scripts/globals/msg "$@"
+}
+
+prompt() {
+    source ~/.bash_scripts/globals/prompt $prompt_type "$@"
+}
+
+main() {
+    prompt_type="${1:-fzf}"
+    msg_type="${2:-terminal}"
+    # local option=$(echo -e "r: Right\nl: Left\nn: Normal\ni: Inverted" | prompt "Choose an orientation: ")
+    # local value=$(echo "$option" | cut -d: -f1)
+
+    local layout_1="[]=  tile"
+    local layout_2="M[]  monocle"
+    local layout_3="@[]  spiral"
+    local layout_4="/[]  dwindle"
+    local layout_5="H[]  deck"
+    local layout_6="TTT  bstack"
+    local layout_7="===  bstackhoriz"
+    local layout_8="HHH  grid"
+    local layout_9="###  nrowgrid"
+    local layout_10="---  horizgrid"
+    local layout_11=":::  gaplessgrid"
+    local layout_12="|M|  centeredmaster"
+    local layout_13=">M>  centeredfloatMaster"
+    local layout_14="><>  floating"
+
+    local options="$layout_1\n$layout_2\n$layout_3\n$layout_4\n$layout_5\n$layout_6\n$layout_7\n$layout_8\n$layout_9\n$layout_10\n$layout_11\n$layout_12\n$layout_13\n$layout_14\n"
+    local value="$(echo -e "$options" | prompt "Switch Layout: ")"
+
+    case $value in
+    $layout_1) fish -c "fsignal 0" ;;
+    $layout_2) fish -c "fsignal 1" ;;
+    $layout_3) fish -c "fsignal 2" ;;
+    $layout_4) fish -c "fsignal 3" ;;
+    $layout_5) fish -c "fsignal 4" ;;
+    $layout_6) fish -c "fsignal 5" ;;
+    $layout_7) fish -c "fsignal 6" ;;
+    $layout_8) fish -c "fsignal 7" ;;
+    $layout_9) fish -c "fsignal 8" ;;
+    $layout_10) fish -c "fsignal 9" ;;
+    $layout_11) fish -c "fsignal 10" ;;
+    $layout_12) fish -c "fsignal 11" ;;
+    $layout_13) fish -c "fsignal 12" ;;
+    $layout_14) fish -c "fsignal 13" ;;
+    esac
+
+}
+
+main "$@"
