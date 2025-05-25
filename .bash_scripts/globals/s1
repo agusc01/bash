@@ -17,7 +17,7 @@ s1() {
     pulsemixer --set-volume "$new_volumen"
 
     source ~/.bash_scripts/globals/msg "Sound $get_mute" "$new_volumen%" "$option"
-    if [[ "$refreshdbar" = "true" ]]; then
+    if [[ "$refreshdbar" == true ]]; then
         source ~/.bash_scripts/globals/refreshdbar
     fi
 }

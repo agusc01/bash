@@ -10,7 +10,7 @@ sunmute() {
     pulsemixer --unmute
 
     source ~/.bash_scripts/globals/msg "Sound Unmute" "$current_volume%" "$option"
-    if [[ "$refreshdbar" -eq true ]]; then
+    if [[ "$refreshdbar" == true ]]; then
         source ~/.bash_scripts/globals/refreshdbar
     fi
 }

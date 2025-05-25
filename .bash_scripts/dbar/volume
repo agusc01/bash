@@ -9,4 +9,4 @@ else
     volume_icon="\x09"
 fi
 
-echo -e "$volume_icon$volume%\x01"
+echo -e "$volume_icon $volume%\x01"

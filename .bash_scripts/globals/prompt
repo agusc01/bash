@@ -9,7 +9,11 @@ prompt() {
     if [ "$1" = "fzf" ]; then
         fzf --height 50% --reverse --prompt "$2"
     elif [ "$1" = "rofi" ]; then
-        rofi -dmenu -p "$2"
+        rofi -dmenu -mesg "$2" \
+            -kb-cancel Escape,Control+c \
+            -kb-row-down "Alt+j" \
+            -kb-row-up "Alt+k" \
+            -theme ~/.bash_scripts/rasi/rofi.rasi
     else
         msg "Error: Unsupported prompt type." " " "$msg_type"
         return 1

@@ -12,7 +12,8 @@ main() {
     prompt_type="${1:-fzf}"
     msg_type="${2:-terminal}"
     local refreshdbar="${3:-true}"
-    local option=$(echo -e "j: Decrement Brightness 10%\nk: Increment Brightness 10%\n0: Set in Brightness 0%\n1: Set in Brightness 10%\n2: Set in Brightness 20%\n3: Set in Brightness 30%\n4: Set in Brightness 40%\n5: Set in Brightness 50%\n6: Set in Brightness 60%\n7: Set in Brightness 70%\n8: Set in Brightness 80%\n9: Set in Brightness 90%\no: Set Brightness in 100%" | prompt "Choose an option: ")
+    local options="j: Decrement Brightness 10%\nk: Increment Brightness 10%\n0: Set in Brightness 0%\n1: Set in Brightness 10%\n2: Set in Brightness 20%\n3: Set in Brightness 30%\n4: Set in Brightness 40%\n5: Set in Brightness 50%\n6: Set in Brightness 60%\n7: Set in Brightness 70%\n8: Set in Brightness 80%\n9: Set in Brightness 90%\no: Set Brightness in 100%"
+    local option=$(echo -e "$options" | prompt "Choose an option: ")
     local value=$(echo "$option" | cut -d: -f1)
 
     case "$value" in

@@ -11,7 +11,7 @@ falias() {
         echo -e "\n$command\n"
         echo -e ".eval: $current_command\n"
 
-        eval "$current_command"
+        fish -c eval "$current_command"
     else
         echo "Aborted!"
     fi

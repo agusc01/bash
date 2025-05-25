@@ -24,7 +24,7 @@ setbrightness() {
 
     local text=$(echo "$new_brightness" | xargs -I {} echo {} "*100" | bc | cut -d. -f1)
     source ~/.bash_scripts/globals/msg "Brightness" "$text%" "$option"
-    if [[ "$refreshdbar" -eq true ]]; then
+    if [[ "$refreshdbar" == true ]]; then
         source ~/.bash_scripts/globals/refreshdbar
     fi
 }
