@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# function to check camera status
+camerastatus() {
+
+    if lsmod | grep -q uvcvideo; then
+        echo "Camera enabled"
+    else
+        echo "Camera disabled"
+    fi
+}
+
+camerastatus

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# function to disable camera
+c0() {
+    local option="${1:-terminal}"
+    local refreshdbar="${2:-false}"
+
+    sudo modprobe -r uvcvideo
+
+    source ~/.bash_scripts/globals/msg "Camera" "Disable" "$option"
+    if [[ "$refreshdbar" == true ]]; then
+        source ~/.bash_scripts/globals/refreshdbar
+    fi
+}
+
+c0 "$@"
