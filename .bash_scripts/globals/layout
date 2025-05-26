@@ -11,8 +11,6 @@ prompt() {
 main() {
     prompt_type="${1:-fzf}"
     msg_type="${2:-terminal}"
-    # local option=$(echo -e "r: Right\nl: Left\nn: Normal\ni: Inverted" | prompt "Choose an orientation: ")
-    # local value=$(echo "$option" | cut -d: -f1)
 
     local layout_1="[]=  tile"
     local layout_2="M[]  monocle"
