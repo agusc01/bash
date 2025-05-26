@@ -47,7 +47,13 @@ alias a='apps'
 alias bluetoothenable='rfkill unblock bluetooth'
 alias bluetoothdisable='rfkill block bluetooth'
 alias gbluetooth='blueman-applet & blueman-manager'
+
 alias audio='pavucontrol'
+
+alias micro="pactl list sources | grep -m 1 'alsa_input' | awk '{print \$2}' "
+alias microstatus="pactl get-source-mute $(micro)"
+alias microstatus2="pactl get-source-mute $(micro) | awk '{print \$2}'"
+
 alias mongoon='sudo mongod --config /etc/mongod.conf'
 
 alias nvimswap='cd /home/dev/.local/state/nvim/swap'
@@ -107,6 +113,7 @@ alias di='xrandr --output $(screen) --rotate inverted'
 
 alias dbarshow='eval $(ls ~/.bash_scripts/dbar/ | sed "s/*//g" | grep -v dbarshow | sed "s/^/dbar_/g" | xargs | sed "s/ / \&\& /g")'
 
+alias cbash='cd ~/bash && nv'
 alias cfish='cd ~/.config/fish && nv'
 alias cdmenu='cd ~/.config/dmenu/ && nv'
 alias cdwm='cd ~/.config/dwm/ && nv'
@@ -116,6 +123,7 @@ alias cslock='cd ~/.config/slock/ && nv'
 alias cst='cd ~/.config/st/ && nv'
 alias csurf='cd ~/.config/surf/ && nv'
 
+alias ubash='~/bash/scripts/recovery-configuration.sh && source ~/.bash_aliases'
 alias ufish='source ~/.config/fish/config.fish'
 alias udmenu='cd ~/.config/dmenu/ && sudo touch config.h && sudo rm config.h && sudo make clean install && sudo dos2unix /usr/local/bin/dmenu_run && sudo dos2unix /usr/local/bin/dmenu_path && sudo dos2unix /usr/local/bin/dmenu_run_desktop && sudo dos2unix /usr/local/bin/dmenu_path_desktop'
 alias udwm='cd ~/.config/dwm/ && sudo touch config.h && sudo rm config.h && sudo make clean install'
