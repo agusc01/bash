@@ -4,12 +4,14 @@ configuration {
 
 @import                          "~/.bash_scripts/rasi/global.rasi"
 
+
+
 window {
     transparency:                "real";
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       540px;
+    // width:                       600px;
     x-offset:                    0px;
     y-offset:                    0px;
     margin:                      0px;
@@ -109,18 +111,21 @@ element alternate.normal {
     background-color:            var(background-alt);
     text-color:                  var(foreground);
 }
+
 element normal.urgent,
 element alternate.urgent,
 element selected.active {
     background-color:            var(urgent);
     text-color:                  var(background);
 }
+
 element normal.active,
 element alternate.active,
 element selected.urgent {
     background-color:            var(active);
     text-color:                  var(background);
 }
+
 element selected.normal {
     background-color:            var(selected);
     text-color:                  var(background);

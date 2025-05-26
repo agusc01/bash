@@ -2,27 +2,41 @@
 
 option_1=''
 option_2=''
+option_3='10%'
+option_4='20%'
+option_5='30%'
+option_6='40%'
+option_7='50%'
+option_8='60%'
+option_9='70%'
+option_10='80%'
+option_11='90%'
+option_12='100%'
 last_selection=0
 
 run_rofi() {
     local get_volume=$(pulsemixer --get-volume | cut -d' ' -f1)
     local get_mute=$(pulsemixer --get-mute | sed s/0/Unmute/ | sed s/1/Mute/)
-    echo -e "$option_1\n$option_2" | rofi -dmenu \
+    local options=$(echo -e "$option_1\n$option_9\n$option_6\n$option_3\n$option_2\n$option_10\n$option_7\n$option_4\n$option_12\n$option_11\n$option_8\n$option_5")
+    echo -e "$options" | rofi -dmenu \
         -mesg "Brightness : $(xrandr --verbose | grep -i brightness | awk '{print $2 *100}' | bc)%" \
         -kb-cancel Escape,Control+c \
-        -kb-row-up "Alt+j" \
-        -kb-row-down "Alt+k" \
-        -markup-rows \
+        -kb-row-up "Alt+k" \
+        -kb-row-down "Alt+j" \
+        -kb-row-left "Alt+h" \
+        -kb-row-right "Alt+l" \
         -selected-row "$last_selection" \
-        -theme "~/.bash_scripts/rasi/volume.rasi"
+        -theme "~/.bash_scripts/rasi/brightness.rasi"
 }
 
 while true; do
     option=$(run_rofi)
     # Check if the option is empty (Rofi closed without selection)
     if [ -z "$option" ]; then
+        eval 'fish -c "refreshdbar"'
         break
     fi
+
     case $option in
     $option_1)
         eval 'fish -c "b0 notify"'
@@ -32,5 +46,46 @@ while true; do
         eval 'fish -c "b1 notify"'
         last_selection=1
         ;;
+    $option_3)
+        eval 'fish -c "setbrightness 10 notify true"'
+        break
+        ;;
+    $option_4)
+        eval 'fish -c "setbrightness 20 notify true"'
+        break
+        ;;
+    $option_5)
+        eval 'fish -c "setbrightness 30 notify true"'
+        break
+        ;;
+    $option_6)
+        eval 'fish -c "setbrightness 40 notify true"'
+        break
+        ;;
+    $option_7)
+        eval 'fish -c "setbrightness 50 notify true"'
+        break
+        ;;
+    $option_8)
+        eval 'fish -c "setbrightness 60 notify true"'
+        break
+        ;;
+    $option_9)
+        eval 'fish -c "setbrightness 70 notify true"'
+        break
+        ;;
+    $option_10)
+        eval 'fish -c "setbrightness 80 notify true"'
+        break
+        ;;
+    $option_11)
+        eval 'fish -c "setbrightness 90 notify true"'
+        break
+        ;;
+    $option_12)
+        eval 'fish -c "setbrightness 100 notify true"'
+        break
+        ;;
+
     esac
 done

@@ -9,9 +9,10 @@ run_rofi() {
     echo -e "$option_1\n$option_2\n$option_3\n$option_4" | rofi -dmenu \
         -mesg "$(hostname) ($(whoami)) Uptime : $(uptime -p | sed -e 's/up //g')" \
         -kb-cancel Escape,Control+c \
-        -kb-row-up "Alt+j" \
-        -kb-row-down "Alt+k" \
-        -markup-rows \
+        -kb-row-up "Alt+k" \
+        -kb-row-down "Alt+j" \
+        -kb-row-left "Alt+h" \
+        -kb-row-right "Alt+l" \
         -theme "~/.bash_scripts/rasi/power.rasi"
 }
 
@@ -19,13 +20,14 @@ confirm_run() {
     local yes=''
     local no=''
     selected="$(echo -e "$yes\n$no" | rofi -dmenu \
-        -p 'Confirmation' \
         -mesg 'Are you Sure?' \
         -selected-row 1 \
         -no-click-to-exit \
         -kb-cancel Escape,Control+c \
-        -kb-row-up "Alt+j" \
-        -kb-row-down "Alt+k" \
+        -kb-row-up "Alt+k" \
+        -kb-row-down "Alt+j" \
+        -kb-row-left "Alt+h" \
+        -kb-row-right "Alt+l" \
         -theme "~/.bash_scripts/rasi/confirm.rasi")"
 
     if [[ "$selected" == "$yes" ]]; then

@@ -1,22 +1,21 @@
 #!/bin/bash
 
-option_1='R'
+option_1='r'
 option_2='L'
-option_3='N'
-option_4='I'
+option_3='n'
+option_4='i'
 last_selection=0
 
 run_rofi() {
-    local get_volume=$(pulsemixer --get-volume | cut -d' ' -f1)
-    local get_mute=$(pulsemixer --get-mute | sed s/0/Unmute/ | sed s/1/Mute/)
     echo -e "$option_1\n$option_2\n$option_3\n$option_4" | rofi -dmenu \
         -mesg "Rotation" \
         -kb-cancel Escape,Control+c \
-        -kb-row-up "Alt+j" \
-        -kb-row-down "Alt+k" \
-        -markup-rows \
+        -kb-row-up "Alt+k" \
+        -kb-row-down "Alt+j" \
+        -kb-row-left "Alt+h" \
+        -kb-row-right "Alt+l" \
         -selected-row "$last_selection" \
-        -theme "~/.bash_scripts/rasi/volume.rasi"
+        -theme "~/.bash_scripts/rasi/rotation.rasi"
 }
 
 while true; do
