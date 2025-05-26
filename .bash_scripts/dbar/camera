@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if lsmod | grep -q uvcvideo; then
+    echo -e "\x07  \x01"
+else
+    echo -e "\x09  \x01"
+fi

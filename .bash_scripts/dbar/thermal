@@ -2,7 +2,7 @@
 
 sum_temperatures=0
 count=0
-temperature_icon=''
+temperature_icon=' '
 temperature_color=''
 
 # Loop through all temperature files in thermal_zone
