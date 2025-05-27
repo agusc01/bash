@@ -1,0 +1,108 @@
+#!/bin/bash
+
+option_1='AI'
+option_2=''
+option_3='dev'
+option_4='duck'
+option_5=''
+option_6=''
+option_7=''
+option_8=''
+option_9='drive'
+option_10=' e-s'
+option_11=' s-e'
+option_12=''
+last_selection=0
+
+run_rofi() {
+    local options=$(echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5\n$option_6\n$option_7\n$option_8\n$option_9\n$option_10\n$option_11\n$option_12")
+    echo -e "$options" | rofi -dmenu \
+        -mesg "Internet" \
+        -kb-cancel Escape,Control+c \
+        -kb-row-up "Alt+k" \
+        -kb-row-down "Alt+j" \
+        -kb-row-left "Alt+h" \
+        -kb-row-right "Alt+l" \
+        -selected-row "$last_selection" \
+        -theme "~/.bash_scripts/rasi/volume.rasi"
+}
+
+internet() {
+    local yes=''
+    local no=''
+    selected="$(echo -e "$yes\n$no" | rofi -dmenu \
+        -mesg 'Do you want private?' \
+        -selected-row 2 \
+        -no-click-to-exit \
+        -kb-cancel Escape,Control+c \
+        -kb-row-up "Alt+k" \
+        -kb-row-down "Alt+j" \
+        -kb-row-left "Alt+h" \
+        -kb-row-right "Alt+l" \
+        -theme "~/.bash_scripts/rasi/confirm.rasi")"
+
+    if [[ "$selected" == "$yes" ]]; then
+        firefox-esr --new-window --private-window "$1" &
+    else
+        firefox-esr --new-window "$1" &
+    fi
+}
+
+while true; do
+    option=$(run_rofi)
+    # Check if the option is empty (Rofi closed without selection)
+    if [ -z "$option" ]; then
+        break
+    fi
+
+    case $option in
+    $option_1)
+        internet "duck.ai"
+        break
+        ;;
+    $option_2)
+        internet "github.com"
+        break
+        ;;
+    $option_3)
+        internet
+        break
+        ;;
+    $option_4)
+        internet "duckduckgo.com"
+        break
+        ;;
+    $option_5)
+        internet "google.co.uk"
+        break
+        ;;
+    $option_6)
+        internet "gmail.com"
+        break
+        ;;
+    $option_7)
+        internet "youtube.com"
+        break
+        ;;
+    $option_8)
+        internet "spotify.com"
+        break
+        ;;
+    $option_9)
+        internet "drive.googe.com"
+        break
+        ;;
+    $option_10)
+        internet "translate.google.co.uk/?sl=en&tl=es&op=translate"
+        break
+        ;;
+    $option_11)
+        internet "translate.google.co.uk/?sl=es&tl=en&op=translate"
+        break
+        ;;
+    $option_12)
+        internet "web.whatsapp.com"
+        break
+        ;;
+    esac
+done
