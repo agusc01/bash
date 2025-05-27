@@ -1,0 +1,51 @@
+#!/bin/bash
+
+option_1=''
+option_2=''
+option_3=''
+option_4=''
+option_5=''
+option_6=''
+option_7=''
+option_8=''
+option_9=''
+option_10=''
+option_11=''
+option_12=''
+option_13=''
+option_14=''
+option_15=''
+options="$option_1\n$option_2\n$option_3\n$option_4\n$option_5\n$option_6\n$option_7\n$option_8\n$option_9\n$option_10\n$option_11\n$option_12\n$option_13\n$option_14\n$option_15"
+last_selection=0
+
+run_rofi() {
+    echo -e "$options" | rofi -dmenu \
+        -mesg "Menu" \
+        -kb-cancel Escape,Control+c \
+        -kb-row-up "Alt+k" \
+        -kb-row-down "Alt+j" \
+        -kb-row-left "Alt+h" \
+        -kb-row-right "Alt+l" \
+        -selected-row "$last_selection" \
+        -theme "~/.bash_scripts/rasi/menu.rasi"
+}
+
+option=$(run_rofi)
+
+case $option in
+$option_1) eval 'fish -c rofi_launcher' ;;
+$option_2) eval 'fish -c oonboard' ;;
+$option_3) eval 'st' ;;
+$option_4) eval 'fish -c rofi_internet' ;;
+$option_5) eval 'fish -c "wifi rofi both"' ;;
+$option_6) eval 'fish -c "bluetooth rofi both"' ;;
+$option_7) eval 'fish -c rofi_brightness' ;;
+$option_8) eval 'fish -c rofi_volume' ;;
+$option_9) eval 'fish -c rofi_microphone' ;;
+$option_10) eval 'fish -c rofi_camera' ;;
+$option_11) eval 'fish -c rofi_rotation' ;;
+$option_12) eval 'fish -c rofi_layout' ;;
+$option_13) eval 'thunar' ;;
+$option_14) eval 'galculator' ;;
+$option_15) eval 'fish -c rofi_power' ;;
+esac
