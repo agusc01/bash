@@ -18,4 +18,4 @@ else
     up_time_color='\x16'
 fi
 
-echo -e "\x01 $date $up_time_color $up_time\x01 $clock\x01"
+echo -e "\x01 $date$up_time_color $up_time\x01 $clock\x01"

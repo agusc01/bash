@@ -4,8 +4,6 @@ configuration {
 
 @import                          "~/.bash_scripts/rasi/global.rasi"
 
-
-
 window {
     transparency:                "real";
     location:                    center;

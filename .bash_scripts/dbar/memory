@@ -5,7 +5,7 @@ memory_use=$(free | grep Mem | awk '{print $3}')
 memory_percent=$(echo "scale=2; ($memory_use / $memory_total) * 100" | bc | cut -d. -f1)
 
 memory=$(free -h | awk 'NR==2 { print $3 }' | sed s/i//g)
-memory_icon=' '
+memory_icon=''
 memory_color=''
 
 if [ "$memory_percent" -gt 80 ]; then
