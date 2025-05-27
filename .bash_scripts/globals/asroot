@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export SUDO_ASKPASS=~/.bash_scripts/rofi/askpass
+
+sudo -A $1

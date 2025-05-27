@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+rofi -dmenu \
+    -password \
+    -i \
+    -p "$(whoami)" \
+    -theme "~/.bash_scripts/rasi/askpass.rasi"

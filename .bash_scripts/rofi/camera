@@ -1,0 +1,42 @@
+#!/bin/bash
+
+option_1=' '
+option_2=' '
+last_selection=0
+ASROOT=~/.bash_scripts/globals/asroot
+
+run_rofi() {
+    local options=$(echo -e "$option_1\n$option_2")
+    echo -e "$options" | rofi -dmenu \
+        -mesg "$(fish -c camerastatus)" \
+        -kb-cancel Escape,Control+c \
+        -kb-row-up "Alt+k" \
+        -kb-row-down "Alt+j" \
+        -kb-row-left "Alt+h" \
+        -kb-row-right "Alt+l" \
+        -selected-row "$last_selection" \
+        -theme "~/.bash_scripts/rasi/camera.rasi"
+}
+
+while true; do
+    option=$(run_rofi)
+    # Check if the option is empty (Rofi closed without selection)
+    if [ -z "$option" ]; then
+        break
+    fi
+
+    case $option in
+    $option_1)
+        ${ASROOT} "modprobe -r uvcvideo"
+        source ~/.bash_scripts/globals/msg "Camera" "Disabled" "notify"
+        source ~/.bash_scripts/globals/refreshdbar
+        break
+        ;;
+    $option_2)
+        ${ASROOT} "modprobe uvcvideo"
+        source ~/.bash_scripts/globals/msg "Camera" "Enabled" "notify"
+        source ~/.bash_scripts/globals/refreshdbar
+        break
+        ;;
+    esac
+done
