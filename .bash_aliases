@@ -41,8 +41,6 @@ alias dk='cd ~/Desktop'
 alias dc='cd ~/Documents'
 alias img='cd ~/Pictures'
 
-alias a='apps'
-
 # TODO: bluetooth as a function to refreshdbar (optional)
 alias bluetoothenable='rfkill unblock bluetooth'
 alias bluetoothdisable='rfkill block bluetooth'
