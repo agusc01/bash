@@ -18,7 +18,7 @@ dbar() {
         "dbar_cpu:5"
         "dbar_thermal:10"
         "dbar_memory:5"
-        "dbar_updates:86400"
+        "dbar_updates:600"
         "dbar_date:55"
         "dbar_battery:60"
     )
