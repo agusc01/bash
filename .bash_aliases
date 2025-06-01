@@ -58,6 +58,7 @@ alias nvimswap='cd /home/dev/.local/state/nvim/swap'
 
 alias r='ranger'
 alias open='thunar'
+alias paint='kolourpaint'
 alias camera='guvcview'
 alias nv='git pull && nvim .'
 alias w='curl wttr.in'
