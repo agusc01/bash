@@ -20,13 +20,13 @@ rr() {
         cd "$name"
         rr
     elif [[ "$type" == "l" ]]; then
-        eval_commmand "nvim" "$name"
+        echo "It is a link"
     fi
 }
 
 eval_commmand() {
-    local $name=$1
-    local $action=$2
+    local action=$1
+    local name=$2
     echo -e "\neval: $action $name\n"
     eval "$(echo $action) $name"
 }
