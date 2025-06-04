@@ -15,12 +15,13 @@ setbrightness() {
         return 1
     fi
 
-    # get the name of the connected screen
-    local screen=$(xrandr | grep ' connected' | cut -d' ' -f1)
+    local screens=$(xrandr | grep ' connected' | cut -d' ' -f1)
 
     local new_brightness=$(echo "scale=2; $value / 100" | bc)
 
-    xrandr --output "$screen" --brightness "$new_brightness"
+    for screen in $screens; do
+        xrandr --output "$screen" --brightness "$new_brightness"
+    done
 
     local text=$(echo "$new_brightness" | xargs -I {} echo {} "*100" | bc | cut -d. -f1)
     source ~/.bash_scripts/globals/msg "Brightness" "$text%" "$option"
