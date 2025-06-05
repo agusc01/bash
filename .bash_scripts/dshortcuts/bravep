@@ -1,0 +1,3 @@
+#!/bin/bash
+
+fish -c "dshortcuts_internet brave-browser -p $1"
