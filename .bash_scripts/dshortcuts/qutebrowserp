@@ -1,3 +1,0 @@
-#!/bin/bash
-
-fish -c "dshortcuts_internet qutebrowser -p $1"

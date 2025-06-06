@@ -39,11 +39,7 @@ internet() {
         fi
         ;;
     qutebrowser)
-        if [ "$type" == "-p" ]; then
-            qutebrowser --private "$url" &
-        else
-            qutebrowser "$url" &
-        fi
+        qutebrowser "$url" &
         ;;
     librewolf)
         if [ "$type" == "-p" ]; then
