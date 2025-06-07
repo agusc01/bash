@@ -33,9 +33,9 @@ internet() {
     case $browser in
     firefox-esr)
         if [ "$type" == "-p" ]; then
-            firefox-esr --private-window "$url" &
+            firefox-esr --new-window --private-window "$url" &
         else
-            firefox-esr "$url" &
+            firefox-esr --new-window "$url" &
         fi
         ;;
     qutebrowser)
@@ -43,9 +43,9 @@ internet() {
         ;;
     librewolf)
         if [ "$type" == "-p" ]; then
-            librewolf --private-window "$url" &
+            librewolf --new-window --private-window "$url" &
         else
-            librewolf "$url" &
+            librewolf --new-window "$url" &
         fi
         ;;
     brave-browser)
