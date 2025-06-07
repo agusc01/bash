@@ -58,6 +58,9 @@ internet() {
     surf)
         surf "$url" &
         ;;
+    vieb)
+        vieb "$url" &
+        ;;
     *)
         msg "You can only use: " "firefox-esr, qutebrowser, librewolf, brave-browser or surf" "$option"
         exit 1
