@@ -46,6 +46,7 @@ alias bluetoothenable='rfkill unblock bluetooth'
 alias bluetoothdisable='rfkill block bluetooth'
 alias gbluetooth='blueman-applet & blueman-manager'
 
+alias pdf='mupdf'
 alias audio='pavucontrol'
 
 alias micro="pactl list sources | grep -m 1 'alsa_input' | awk '{print \$2}' "
