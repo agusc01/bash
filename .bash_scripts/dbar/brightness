@@ -1,5 +1,5 @@
 #!/bin/sh
 
-brightness=$(xrandr --verbose | grep -i brightness | awk '{print $2 *100}' | bc)
+brightness=$(xrandr --verbose | grep -i brightness | awk '{print $2 *100}' | head -1)
 brightness_icon=""
-echo -e "$brightness_icon $brightness%"
+echo -e "$brightness_icon $brightness%\x01"
