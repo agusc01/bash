@@ -1,0 +1,119 @@
+#!/bin/bash
+readonly NETWORKS="/etc/network/.networks"
+readonly INTERFACES="/etc/network/interfaces"
+readonly WIFI_INTERFACE=$(iw dev | grep -i interface | tail -1 | xargs | cut -d " " -f2)
+
+insert_content() {
+    local new_content="$1"
+    local file="$2"
+
+    if [ ! -e "$file" ]; then
+        sudo touch "$file"
+    fi
+
+    temp_file=$(mktemp)
+    echo -e "$new_content" >"$temp_file"
+    cat "$file" >>"$temp_file"
+    sudo mv "$temp_file" "$file"
+    sudo chown root:root "$file"
+    sudo chmod 666 "$file"
+}
+
+add_network() {
+    local new_network="wpa-ssid $ssid\nwpa-psk  $psk\ndate     $(date)\n"
+    insert_content "$new_network" "$NETWORKS"
+}
+
+ask_psk() {
+    read -sp "Enter the password for $ssid: " psk
+    if [ -z "$psk" ]; then
+        echo "It could not be empty."
+        exit 1
+    fi
+}
+
+create_interfaces() {
+
+    sudo touch "$INTERFACES"
+    sudo mv "$INTERFACES" "$INTERFACES.bak"
+    insert_content "# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+allow-hotplug $WIFI_INTERFACE
+iface $WIFI_INTERFACE inet dhcp
+	wpa-ssid name
+	wpa-psk  pass
+" "$INTERFACES"
+    sudo chmod 666 "$INTERFACES"
+
+}
+
+_wifion() {
+    sudo kill -9 $(pgrep wpa_supplicant) || true
+    sudo ifdown $(echo "$WIFI_INTERFACE")
+    sudo ifup $(echo "$WIFI_INTERFACE")
+    fish -c refreshdbar || true
+}
+
+update_interfaces() {
+    sudo sed -i "s/wpa-ssid .*/wpa-ssid $ssid/" "$INTERFACES"
+    sudo sed -i "s/wpa-psk .*/wpa-psk  $psk/" "$INTERFACES"
+    _wifion
+}
+
+dwifi() {
+
+    sudo echo -e "\nScanning WiFi networks...\n"
+
+    create_interfaces
+    sudo rfkill unblock wlan
+    sudo ip link set $(echo "$WIFI_INTERFACE") up
+
+    networks=$(sudo iwlist $(echo "$WIFI_INTERFACE") scan | grep SSID | cut -d: -f2 | tr -d ' "' | sed '/^$/d' | sort | uniq)
+    if [ -z "$networks" ]; then
+        echo "No WiFi networks found."
+        exit 1
+    fi
+
+    echo -e "Available WiFi networks:\n"
+    echo -e "$networks\n" | nl
+
+    read -p "Select a network (number): " choice
+    ssid=$(echo "$networks" | sed -n "$((choice + 0))p")
+    if [ -z "$ssid" ]; then
+        echo "Invalid selection."
+        exit 1
+    fi
+
+    result=$(grep -m1 -A1 "^wpa-ssid $ssid$" "$NETWORKS" | tr -d '\t')
+    if [ -z "$result" ]; then
+        ask_psk
+        add_network
+        update_interfaces
+        exit 0
+    fi
+
+    saved_psk=$(grep -m1 -A1 "^wpa-ssid $ssid$" "$NETWORKS" | grep wpa-psk | sed 's/wpa-psk  //g' | tr -d '\t')
+    echo -e "\nYou have selected: $ssid"
+    echo -e "The last password used was $saved_psk\n"
+    read -p "Do you want change the password ? (y/n): [n] " same_psk
+
+    if [[ "$same_psk" == "y" || "$same_psk" == "Y" ]]; then
+        ask_psk
+        add_network
+        update_interfaces
+    else
+        echo "ok"
+        psk=$saved_psk
+        update_interfaces
+    fi
+    exit 0
+}
+
+dwifi
