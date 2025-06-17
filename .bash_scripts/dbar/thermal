@@ -22,21 +22,22 @@ done
 
 # Calculate the average
 if [ $count -gt 0 ]; then
-    average=$(echo "scale=1; $sum_temperatures / $count" | bc | cut -d. -f1)
+    average=$(echo "scale=1; $sum_temperatures / $count" | bc)
+    average_int=$(echo "$average" | awk '{printf "%d", $1}') # Redondear a entero
 
-    if [ "$average" -gt 40 ]; then
+    if [[ "$average_int" -gt 40 ]]; then
         temperature_color='\x03'
-    elif [ "$average" -gt 39 ]; then
+    elif [[ "$average_int" -gt 39 ]]; then
         temperature_color='\x04'
-    elif [ "$average" -gt 38 ]; then
+    elif [[ "$average_int" -gt 38 ]]; then
         temperature_color='\x0b'
-    elif [ "$average" -gt 37 ]; then
+    elif [[ "$average_int" -gt 37 ]]; then
         temperature_color='\x0c'
-    elif [ "$average" -gt 36 ]; then
+    elif [[ "$average_int" -gt 36 ]]; then
         temperature_color='\x0d'
-    elif [ "$average" -gt 35 ]; then
+    elif [[ "$average_int" -gt 35 ]]; then
         temperature_color='\x0e'
-    elif [ "$average" -gt 34 ]; then
+    elif [[ "$average_int" -gt 34 ]]; then
         temperature_color='\x15'
     else
         temperature_color='\x16'

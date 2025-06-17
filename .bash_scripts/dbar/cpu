@@ -1,22 +1,25 @@
 #!/bin/sh
 
-cpu_usage=$(mpstat 1 1 | tail -1 | awk '{print $5}' | cut -d. -f1)
+cpu_usage=$(mpstat 1 1 | tail -1 | awk '{print $5}')
 cpu_icon=''
 cpu_color=''
 
-if [ "$cpu_usage" -gt 80 ]; then
+# Convertir el uso de CPU a un número entero para las comparaciones
+cpu_usage_int=$(printf "%.0f" "$cpu_usage") # Convertir a entero sin redondear
+
+if [ "$cpu_usage_int" -gt 80 ]; then
     cpu_color='\x03'
-elif [ "$cpu_usage" -gt 70 ]; then
+elif [ "$cpu_usage_int" -gt 70 ]; then
     cpu_color='\x04'
-elif [ "$cpu_usage" -gt 55 ]; then
+elif [ "$cpu_usage_int" -gt 55 ]; then
     cpu_color='\x05'
-elif [ "$cpu_usage" -gt 45 ]; then
+elif [ "$cpu_usage_int" -gt 45 ]; then
     cpu_color='\x06'
-elif [ "$cpu_usage" -gt 35 ]; then
+elif [ "$cpu_usage_int" -gt 35 ]; then
     cpu_color='\x0d'
-elif [ "$cpu_usage" -gt 30 ]; then
+elif [ "$cpu_usage_int" -gt 30 ]; then
     cpu_color='\x0e'
-elif [ "$cpu_usage" -gt 20 ]; then
+elif [ "$cpu_usage_int" -gt 20 ]; then
     cpu_color='\x16'
 else
     cpu_color='\x20'
