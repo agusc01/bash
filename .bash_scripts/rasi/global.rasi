@@ -5,6 +5,6 @@
     selected:       #42A5F5;
     active:         #009900;
     urgent:         #FF0000;
-    font:       "Ubuntu 10";
+    font:       "Ubuntu 18";
 }
 
