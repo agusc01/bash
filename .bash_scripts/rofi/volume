@@ -62,42 +62,52 @@ while true; do
         break
         ;;
     $option_6)
+        eval 'fish -c "sunmute"'
         eval 'fish -c "setsound 10 notify true"'
         break
         ;;
     $option_7)
+        eval 'fish -c "sunmute"'
         eval 'fish -c "setsound 20 notify true"'
         break
         ;;
     $option_8)
+        eval 'fish -c "sunmute"'
         eval 'fish -c "setsound 30 notify true"'
         break
         ;;
     $option_9)
+        eval 'fish -c "sunmute"'
         eval 'fish -c "setsound 40 notify true"'
         break
         ;;
     $option_10)
+        eval 'fish -c "sunmute"'
         eval 'fish -c "setsound 50 notify true"'
         break
         ;;
     $option_11)
+        eval 'fish -c "sunmute"'
         eval 'fish -c "setsound 60 notify true"'
         break
         ;;
     $option_12)
+        eval 'fish -c "sunmute"'
         eval 'fish -c "setsound 70 notify true"'
         break
         ;;
     $option_13)
+        eval 'fish -c "sunmute"'
         eval 'fish -c "setsound 80 notify true"'
         break
         ;;
     $option_14)
+        eval 'fish -c "sunmute"'
         eval 'fish -c "setsound 90 notify true"'
         break
         ;;
     $option_15)
+        eval 'fish -c "sunmute"'
         eval 'fish -c "setsound 100 notify true"'
         break
         ;;
