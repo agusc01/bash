@@ -47,7 +47,7 @@ $option_10) eval 'fish -c rofi_camera' ;;
 $option_11) eval 'fish -c camera' ;;
 $option_12) eval 'fish -c rofi_rotation' ;;
 $option_13) eval 'fish -c rofi_layout' ;;
-$option_14) eval 'thunar' ;;
+$option_14) eval 'fish -c open' ;;
 $option_15) eval 'galculator' ;;
 $option_16) eval 'fish -c rofi_power' ;;
 esac
