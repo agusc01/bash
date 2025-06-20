@@ -2,10 +2,13 @@
 
 # function to refresh dbar (dwm environments)
 refreshdbar() {
+    local force="${1:-false}"
+
     fish -c 'killdbar'
 
-    fish -c 'dbar'
-
+    if ! pgrep -x "dwm" >/dev/null || [[ "$force" == "true" ]]; then
+        fish -c 'dbar'
+    fi
 }
 
-refreshdbar
+refreshdbar "$1"
