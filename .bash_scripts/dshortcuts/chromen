@@ -1,0 +1,3 @@
+#!/bin/bash
+
+fish -c "dshortcuts_internet google-chrome -n $1"

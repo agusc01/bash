@@ -55,6 +55,13 @@ internet() {
             brave-browser "$url" &
         fi
         ;;
+    google-chrome)
+        if [ "$type" == "-p" ]; then
+            google-chrome --new-window --incognito "$url" &
+        else
+            google-chrome --new-window "$url" &
+        fi
+        ;;
     surf)
         surf "$url" &
         ;;
