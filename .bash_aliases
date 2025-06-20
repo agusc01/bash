@@ -39,15 +39,12 @@ alias gls='git ls && git s'
 alias dw='cd ~/Downloads'
 alias dk='cd ~/Desktop'
 alias dc='cd ~/Documents'
-alias img='cd ~/Pictures'
+alias pic='cd ~/Pictures'
 
 # TODO: bluetooth as a function to refreshdbar (optional)
 alias bluetoothenable='rfkill unblock bluetooth'
 alias bluetoothdisable='rfkill block bluetooth'
 alias gbluetooth='blueman-applet & blueman-manager'
-
-alias pdf='mupdf'
-alias audio='pavucontrol'
 
 alias micro="pactl list sources | grep -m 1 'alsa_input' | awk '{print \$2}' "
 alias microstatus="pactl get-source-mute $(micro)"
@@ -57,19 +54,33 @@ alias mongoon='sudo mongod --config /etc/mongod.conf'
 
 alias nvimswap='cd /home/dev/.local/state/nvim/swap'
 
-alias r='ranger'
-alias open='thunar'
-alias paint='kolourpaint'
+alias r='cfiles'
+alias rrr='ranger'
+alias open='qtfm' #'thunar'
+alias paint='mtpaint'
+alias imagen='pqiv'
+alias screenshot='flameshot gui'
+alias picker='gpick'
 alias camera='guvcview'
+alias bat='batcat --style=numbers --color=always'
+alias pdf='mupdf'
+alias audio='pavucontrol'
+alias partition='sudo gparted'
+alias ggit='lazygit'
+alias ddocker='lazydocker'
+alias nn='lazynpm'
+alias nr='npm run'
+alias xampp='sudo /opt/lampp/manager-linux-x64.run'
+alias fd='fdfind'
+alias man2='tldr'
+alias fzf='fzf --reverse --inline-info --height 100%'
+
 alias nv='git pull && nvim .'
 alias w='curl wttr.in'
 alias weather='curl wttr.in'
-alias bat='batcat --style=numbers --color=always'
-alias man2='tldr'
-alias fzf='fzf --reverse --inline-info --height 100%'
-alias fd='fdfind'
 alias copyme='xclip -selection clipboard'
 alias xme='xclip -selection clipboard'
+
 alias hurl='cat | grep -Eo $URL_REGEX | tr " " "\n" | fzf'
 alias xurl='hurl | copyme'
 alias surl='hurl | xargs surf'
@@ -78,18 +89,11 @@ alias fpurl='hurl | xargs firefox-esr --private-window'
 alias wurl='hurl | xargs wget'
 alias cpwd='pwd | copyme'
 
-alias ggit='lazygit'
-alias ddocker='lazydocker'
-alias nn='lazynpm'
-alias nr='npm run'
-alias xampp='sudo /opt/lampp/manager-linux-x64.run'
-
 alias ethernetinterface='nmcli device status | grep ethernet | cut -d " " -f1 | head -1'
 
+# alias wifiip see function wifiip
 alias wifiset='nvim /etc/network/interfaces'
 alias wifishow='cat /etc/network/interfaces'
-
-# alias wifiip see function wifiip
 alias wifilast='grep -A1 ssid /etc/network/interfaces | tr -d "\t"'
 alias wifihistory='cat /etc/network/.networks'
 alias wifiinterface='nmcli device status | grep wifi | cut -d" " -f1 | head -1'
@@ -121,6 +125,7 @@ alias cdshortcuts='cd ~/.config/dshortcuts/ && nv'
 alias cslock='cd ~/.config/slock/ && nv'
 alias cst='cd ~/.config/st/ && nv'
 alias csurf='cd ~/.config/surf/ && nv'
+alias cnvim='cd ~/.config/nvim/ && nv'
 
 alias ubash='~/bash/scripts/recovery-configuration.sh && source ~/.bash_aliases'
 alias ufish='source ~/.config/fish/config.fish'
