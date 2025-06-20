@@ -135,3 +135,5 @@ alias udshortcuts='cd ~/.config/dshortcuts/ && sudo touch config.h && sudo rm co
 alias uslock='cd ~/.config/slock/ && sudo touch config.h && sudo rm config.h && sudo make clean install'
 alias ust='cd ~/.config/st/ && sudo touch config.h && sudo rm config.h && sudo make clean install'
 alias usurf='cd ~/.config/surf/ && sudo touch config.h && sudo rm config.h && sudo make clean install'
+
+alias pkilldwm='killdbar && pkill dwm'

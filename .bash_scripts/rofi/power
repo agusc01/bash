@@ -62,7 +62,7 @@ confirm_run_no() {
 case $(run_rofi) in
 $option_1) confirm_run_yes 'fish -c "ssuspend"' ;;
 $option_2) confirm_run_yes 'fish -c "sslock"' ;;
-$option_3) confirm_run_no 'systemctl poweroff' ;;
+$option_3) confirm_run_no 'systemctl shutdown now' ;;
 $option_4) confirm_run_no 'systemctl reboot' ;;
-$option_5) confirm_run_no 'pkill dwm' ;;
+$option_5) confirm_run_no 'fish -c "pkilldwm"' ;;
 esac
