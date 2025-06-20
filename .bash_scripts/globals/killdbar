@@ -5,7 +5,9 @@ killdbar() {
     if [ -f /tmp/dbar_pid ]; then
         kill $(cat /tmp/dbar_pid)
         rm /tmp/dbar_pid # Opcional
-        xsetroot -name " "
+        if ! pgrep -x "dwm" >/dev/null; then
+            xsetroot -name " "
+        fi
     fi
 }
 
