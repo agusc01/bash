@@ -54,8 +54,9 @@ alias mongoon='sudo mongod --config /etc/mongod.conf'
 
 alias nvimswap='cd /home/dev/.local/state/nvim/swap'
 
-alias r='cfiles'
-alias rrr='ranger'
+alias r='yazi'
+alias rrr='cfiles'
+alias rrrr='ranger'
 alias open='qtfm' #'thunar'
 alias paint='mtpaint'
 alias imagen='pqiv'
