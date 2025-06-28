@@ -9,18 +9,18 @@ execute_command() {
 dbar() {
     # Define the commands with their update intervals in a single array
     commands=(
-        "dbar_bluetooth:60"
-        "dbar_wifi:60"
-        "dbar_brightness:86400"
-        "dbar_volume:86400"
-        "dbar_microphone:86400"
-        "dbar_camera:86400"
+        "dbar_bluetooth:10"
+        "dbar_wifi:10"
+        "dbar_brightness:10"
+        "dbar_volume:10"
+        "dbar_microphone:10"
+        "dbar_camera:10"
         "dbar_cpu:5"
-        "dbar_thermal:10"
+        "dbar_thermal:5"
         "dbar_memory:5"
         "dbar_updates:600"
         "dbar_date:55"
-        "dbar_battery:60"
+        "dbar_battery:30"
     )
 
     # Initialize counters and last outputs for each command
