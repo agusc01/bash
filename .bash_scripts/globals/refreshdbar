@@ -6,7 +6,7 @@ refreshdbar() {
 
     fish -c 'killdbar'
 
-    if ! pgrep -x "dwm" >/dev/null || [[ "$force" == "true" ]]; then
+    if pgrep -x "dwm" >/dev/null || [[ "$force" == "true" ]]; then
         fish -c 'dbar'
     fi
 }
