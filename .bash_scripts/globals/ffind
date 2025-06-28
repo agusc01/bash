@@ -2,8 +2,11 @@
 
 # function to find files by name
 ffind() {
-    if [[ -n "$1" ]]; then
-        find / -name "$1" 2>/dev/null
+    local name="$1"
+    local path="${2:-/}"
+
+    if [[ -n "$name" ]]; then
+        find $(echo "$path") -name "$name" 2>/dev/null
     else
         echo "Aborted! You did not provide any argument."
     fi
