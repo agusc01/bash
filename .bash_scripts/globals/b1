@@ -1,12 +1,10 @@
 #!/bin/bash
 # TODO: use screen alias
-# TODO: use refreshdbar function
 
 # function to decrease 10% the brightness of the screen
 b1() {
 
     local option="${1:-terminal}"
-    local refreshdbar="${2:-false}"
     local screens=$(xrandr | grep ' connected' | cut -d' ' -f1)
 
     # get the current brightness value
@@ -27,9 +25,6 @@ b1() {
 
     local text=$(echo "$new_brightness" | xargs -I {} echo {} "*100" | bc | cut -d. -f1)
     source ~/.bash_scripts/globals/msg "Brightness" "$text%" "$option"
-    if [[ "$refreshdbar" == true ]]; then
-        source ~/.bash_scripts/globals/refreshdbar
-    fi
 }
 
 b1 "$@"

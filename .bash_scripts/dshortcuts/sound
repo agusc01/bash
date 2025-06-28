@@ -3,19 +3,19 @@
 # TODO: use fsignal
 
 case "$1" in
-j) fish -c 's0 notify true' ;;
-k) fish -c 's1 notify true' ;;
-0) fish -c 'setsound 0 notify true' ;;
-1) fish -c 'sunmute' && fish -c 'setsound  10 notify true' ;;
-2) fish -c 'sunmute' && fish -c 'setsound  20 notify true' ;;
-3) fish -c 'sunmute' && fish -c 'setsound  30 notify true' ;;
-4) fish -c 'sunmute' && fish -c 'setsound  40 notify true' ;;
-5) fish -c 'sunmute' && fish -c 'setsound  50 notify true' ;;
-6) fish -c 'sunmute' && fish -c 'setsound  60 notify true' ;;
-7) fish -c 'sunmute' && fish -c 'setsound  70 notify true' ;;
-8) fish -c 'sunmute' && fish -c 'setsound  80 notify true' ;;
-9) fish -c 'sunmute' && fish -c 'setsound  90 notify true' ;;
-o) fish -c 'sunmute' && fish -c 'setsound 100 notify true' ;;
-u) fish -c 'sunmute notify true' ;;
-m) fish -c 'smute notify true' ;;
+j) fish -c 's0 notify' ;;
+k) fish -c 's1 notify' ;;
+0) fish -c 'setsound 0 notify' ;;
+1) fish -c 'sunmute' && fish -c 'setsound  10 notify' ;;
+2) fish -c 'sunmute' && fish -c 'setsound  20 notify' ;;
+3) fish -c 'sunmute' && fish -c 'setsound  30 notify' ;;
+4) fish -c 'sunmute' && fish -c 'setsound  40 notify' ;;
+5) fish -c 'sunmute' && fish -c 'setsound  50 notify' ;;
+6) fish -c 'sunmute' && fish -c 'setsound  60 notify' ;;
+7) fish -c 'sunmute' && fish -c 'setsound  70 notify' ;;
+8) fish -c 'sunmute' && fish -c 'setsound  80 notify' ;;
+9) fish -c 'sunmute' && fish -c 'setsound  90 notify' ;;
+o) fish -c 'sunmute' && fish -c 'setsound 100 notify' ;;
+u) fish -c 'sunmute notify' ;;
+m) fish -c 'smute notify' ;;
 esac

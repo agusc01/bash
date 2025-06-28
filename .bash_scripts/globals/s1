@@ -1,11 +1,9 @@
 #!/bin/bash
-# TODO: use refreshdbar function
 
 # function increase 10% the sound
 s1() {
 
     local option="${1:-terminal}"
-    local refreshdbar="${2:-false}"
     local current_volume=$(pulsemixer --get-volume | cut -d' ' -f1)
     local new_volumen=$(echo "$current_volume" + 10 | bc)
 
@@ -17,9 +15,6 @@ s1() {
     pulsemixer --set-volume "$new_volumen"
 
     source ~/.bash_scripts/globals/msg "Sound $get_mute" "$new_volumen%" "$option"
-    if [[ "$refreshdbar" == true ]]; then
-        source ~/.bash_scripts/globals/refreshdbar
-    fi
 }
 
 s1 "$@"

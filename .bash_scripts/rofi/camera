@@ -29,13 +29,11 @@ while true; do
     $option_1)
         ${ASROOT} "modprobe -r uvcvideo"
         source ~/.bash_scripts/globals/msg "Camera" "Disabled" "notify"
-        source ~/.bash_scripts/globals/refreshdbar
         break
         ;;
     $option_2)
         ${ASROOT} "modprobe uvcvideo"
         source ~/.bash_scripts/globals/msg "Camera" "Enabled" "notify"
-        source ~/.bash_scripts/globals/refreshdbar
         break
         ;;
     esac

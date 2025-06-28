@@ -1,13 +1,11 @@
 #!/bin/bash
 # TODO: use screen alias
-# TODO: use refreshdbar function
 
 # function to set brightness
 setbrightness() {
 
     local value=$1
     local option="${2:-terminal}"
-    local refreshdbar="${3:-false}"
 
     # check if the value is less than 10 or greater than 100
     if [[ $value -lt 10 || $value -gt 100 ]]; then
@@ -25,9 +23,6 @@ setbrightness() {
 
     local text=$(echo "$new_brightness" | xargs -I {} echo {} "*100" | bc | cut -d. -f1)
     source ~/.bash_scripts/globals/msg "Brightness" "$text%" "$option"
-    if [[ "$refreshdbar" == true ]]; then
-        source ~/.bash_scripts/globals/refreshdbar
-    fi
 }
 
 setbrightness "$@"

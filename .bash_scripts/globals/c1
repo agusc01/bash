@@ -3,14 +3,10 @@
 # function to enable camera
 c1() {
     local option="${1:-terminal}"
-    local refreshdbar="${2:-false}"
 
     sudo modprobe uvcvideo
 
     source ~/.bash_scripts/globals/msg "Camera" "Enabled" "$option"
-    if [[ "$refreshdbar" == true ]]; then
-        source ~/.bash_scripts/globals/refreshdbar
-    fi
 }
 
 c1 "$@"

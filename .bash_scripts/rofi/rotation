@@ -24,6 +24,7 @@ while true; do
     if [ -z "$option" ]; then
         break
     fi
+
     case $option in
     $option_1)
         eval 'fish -c "dr"'

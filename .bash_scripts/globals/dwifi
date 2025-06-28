@@ -58,7 +58,6 @@ _wifion() {
     sudo kill -9 $(pgrep wpa_supplicant) || true
     sudo ifdown $(echo "$WIFI_INTERFACE")
     sudo ifup $(echo "$WIFI_INTERFACE")
-    fish -c refreshdbar || true
 }
 
 update_interfaces() {

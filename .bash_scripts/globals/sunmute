@@ -1,18 +1,13 @@
 #!/bin/bash
-# TODO: use refreshdbar function
 
 # function unmute the sound
 sunmute() {
 
     local option="${1:-terminal}"
-    local refreshdbar="${2:-false}"
     local current_volume=$(pulsemixer --get-volume | cut -d' ' -f1)
     pulsemixer --unmute
 
     source ~/.bash_scripts/globals/msg "Sound Unmute" "$current_volume%" "$option"
-    if [[ "$refreshdbar" == true ]]; then
-        source ~/.bash_scripts/globals/refreshdbar
-    fi
 }
 
 sunmute "$@"

@@ -22,10 +22,8 @@ wifi() {
         exit
     elif [ "$chosen_network" = "󰖩  Enable Wi-Fi" ]; then
         rfkill unblock wlan && sleep 1 && nmcli radio wifi on
-        source ~/.bash_scripts/globals/refreshdbar
     elif [ "$chosen_network" = "󰖪  Disable Wi-Fi" ]; then
         rfkill block wlan && sleep 1 && nmcli radio wifi off
-        source ~/.bash_scripts/globals/refreshdbar
     else
         success_message="Wi-Fi SSID: \"$chosen_id\"."
         saved_connections=$(nmcli -g NAME connection)
@@ -39,13 +37,11 @@ wifi() {
             fi
 
             nmcli connection up id "$chosen_id" | grep "successfully" && msg "Connection Established" "$success_message" "$msg_type"
-            source ~/.bash_scripts/globals/refreshdbar
         else
             if [[ "$chosen_network" =~ "" ]]; then
                 wifi_password=$(prompt "$prompt_type" "Password: ")
             fi
             nmcli device wifi connect "$chosen_id" password "$wifi_password" | grep "successfully" && msg "Connection Established" "$success_message" "$msg_type"
-            source ~/.bash_scripts/globals/refreshdbar
         fi
     fi
 }

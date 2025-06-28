@@ -33,7 +33,6 @@ while true; do
     option=$(run_rofi)
     # Check if the option is empty (Rofi closed without selection)
     if [ -z "$option" ]; then
-        eval 'fish -c "refreshdbar"'
         break
     fi
 
@@ -47,43 +46,43 @@ while true; do
         last_selection=1
         ;;
     $option_3)
-        eval 'fish -c "setbrightness 10 notify true"'
+        eval 'fish -c "setbrightness 10 notify"'
         break
         ;;
     $option_4)
-        eval 'fish -c "setbrightness 20 notify true"'
+        eval 'fish -c "setbrightness 20 notify"'
         break
         ;;
     $option_5)
-        eval 'fish -c "setbrightness 30 notify true"'
+        eval 'fish -c "setbrightness 30 notify"'
         break
         ;;
     $option_6)
-        eval 'fish -c "setbrightness 40 notify true"'
+        eval 'fish -c "setbrightness 40 notify"'
         break
         ;;
     $option_7)
-        eval 'fish -c "setbrightness 50 notify true"'
+        eval 'fish -c "setbrightness 50 notify"'
         break
         ;;
     $option_8)
-        eval 'fish -c "setbrightness 60 notify true"'
+        eval 'fish -c "setbrightness 60 notify"'
         break
         ;;
     $option_9)
-        eval 'fish -c "setbrightness 70 notify true"'
+        eval 'fish -c "setbrightness 70 notify"'
         break
         ;;
     $option_10)
-        eval 'fish -c "setbrightness 80 notify true"'
+        eval 'fish -c "setbrightness 80 notify"'
         break
         ;;
     $option_11)
-        eval 'fish -c "setbrightness 90 notify true"'
+        eval 'fish -c "setbrightness 90 notify"'
         break
         ;;
     $option_12)
-        eval 'fish -c "setbrightness 100 notify true"'
+        eval 'fish -c "setbrightness 100 notify"'
         break
         ;;
 

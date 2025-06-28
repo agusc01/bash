@@ -3,14 +3,10 @@
 # function to mute microphone
 m0() {
     local option="${1:-terminal}"
-    local refreshdbar="${2:-false}"
 
     pactl set-source-mute $(fish -c micro) 1
 
     source ~/.bash_scripts/globals/msg "Microphone" "$(fish -c microstatus)" "$option"
-    if [[ "$refreshdbar" == true ]]; then
-        source ~/.bash_scripts/globals/refreshdbar
-    fi
 }
 
 m0 "$@"

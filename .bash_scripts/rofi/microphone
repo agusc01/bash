@@ -26,11 +26,11 @@ while true; do
 
     case $option in
     $option_1)
-        fish -c "m0 notify true"
+        fish -c "m0 notify"
         break
         ;;
     $option_2)
-        fish -c "m1 notify true"
+        fish -c "m1 notify"
         break
         ;;
     esac

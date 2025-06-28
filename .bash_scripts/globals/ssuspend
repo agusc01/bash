@@ -1,10 +1,8 @@
 #!/bin/bash
 
 ssuspend() {
-
     systemctl suspend
     fish -c "sslock"
-
 }
 
 ssuspend "$@"
