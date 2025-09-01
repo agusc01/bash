@@ -1,5 +1,9 @@
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ecophp='cd /opt/lampp/htdocs/ecommercephp/'
+alias wwwlocal='cd /opt/lampp/htdocs/wwwlocal/'
+alias r1='cd ~/Documents/r1/'
+
 alias l='lsd -alh'
 alias lb='lsd -alh | bat'
 alias lff='lsd -alh | fzf | awk -v pwd="$(pwd)" "{print pwd \"/\" \$9}" | copyme'
@@ -119,6 +123,9 @@ alias dr='xrandr --output $(screen) --rotate right'
 alias dl='xrandr --output $(screen) --rotate left'
 alias dn='xrandr --output $(screen) --rotate normal'
 alias di='xrandr --output $(screen) --rotate inverted'
+
+alias touchscreen="xinput list | grep -i 'touchscreen' | cut -d'=' -f2 |awk '{print $1}'"
+alias pencil="xinput list | grep -i 'pen' | cut -d'=' -f2 |awk '{print $1}'"
 
 alias dbarshow='eval $(ls ~/.bash_scripts/dbar/ | sed "s/*//g" | grep -v dbarshow | sed "s/^/dbar_/g" | xargs | sed "s/ / \&\& /g")'
 

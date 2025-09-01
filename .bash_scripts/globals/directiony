@@ -1,0 +1,15 @@
+#!/bin/bash
+msg() {
+    source ~/.bash_scripts/globals/msg "$@"
+}
+
+prompt() {
+    source ~/.bash_scripts/globals/prompt $prompt_type "$@"
+}
+
+main() {
+    xinput set-prop $(fish -c touchscreen) --type=float "Coordinate Transformation Matrix" 0 -1 0 1 0 0 0 0 1 # vertical
+    xinput set-prop $(fish -c pencil) --type=float "Coordinate Transformation Matrix" 0 -1 0 1 0 0 0 0 1      # vertical
+}
+
+main "$@"
