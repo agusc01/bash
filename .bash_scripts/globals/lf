@@ -2,7 +2,7 @@
 
 # function to find a file, folder, link or etc, and copy the name
 lf() {
-    ls -alh | fzf | awk '{print $9}' | xclip -selection clipboard
+    ls -alh | fzf | awk '{print $9}' | wl-copy
 }
 
 lf

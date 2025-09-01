@@ -7,7 +7,7 @@ chistory() {
 
     if [[ -n "$command" ]]; then
         echo -e "\n$command\n"
-        echo "$command" | xclip -selection clipboard
+        echo "$command" | wl-copy
     else
         echo "Aborted!"
     fi
